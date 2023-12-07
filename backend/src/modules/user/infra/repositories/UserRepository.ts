@@ -9,6 +9,65 @@ import IUpdateUserDTO from '@modules/user/domain/dtos/IUpdateUserDTO';
 export default class UserRepositoryImpl implements IUserRepository {
   constructor(private readonly client: PoolClient) {}
 
+  async existsById(userId: string): Promise<boolean> {
+    const result = await this.client.query(
+      `
+      SELECT EXISTS(
+        SELECT 1 FROM users 
+        WHERE user_id = $1
+      )
+      `,
+      [userId],
+    );
+    return result.rows[0].exists;
+  }
+
+  async getUserByMail(mail: string): Promise<IUser> {
+    const result = await this.client.query(
+      `
+      SELECT * FROM users
+      WHERE mail = $1
+      `,
+      [mail],
+    );
+
+    if (result.rows[0]) {
+      const user = result.rows[0];
+      return {
+        userId: user.user_id,
+        mail: user.mail,
+        name: user.name,
+        password: user.password,
+        creationDate: user.creation_date,
+        updateDate: user.update_date,
+      };
+    } else {
+      return null;
+    }
+  }
+
+  async existsByMail(mail: string): Promise<boolean> {
+    const result = await this.client.query(
+      `
+      SELECT EXISTS(
+        SELECT 1 FROM users 
+        WHERE mail = $1
+      )
+      `,
+      [mail],
+    );
+    return result.rows[0].exists;
+  }
+
+  async countUsers(): Promise<number> {
+    const result = await this.client.query(
+      `
+      SELECT COUNT(*) AS TOTAL_COUNT FROM users
+      `,
+    );
+    return parseInt(result.rows[0].total_count);
+  }
+
   async createUser(user: ICreateUserDTO): Promise<void> {
     await this.client.query(
       `
