@@ -11,7 +11,7 @@ export default class AppContext {
     }
   }
 
-  public async getClient() {
+  public getClient() {
     return this.client;
   }
 
@@ -23,8 +23,10 @@ export default class AppContext {
     }
   }
 
-  public async release() {
-    this.client.release();
+  public release() {
+    if (this.client) {
+      this.client.release();
+    }
   }
 
   public async commit() {

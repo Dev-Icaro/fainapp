@@ -1,4 +1,4 @@
-export default interface IUseerDTO {
+export default interface IUserDTO {
   userId: number;
   mail: string;
   password: string;
