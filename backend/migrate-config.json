@@ -1,0 +1,4 @@
+{
+  "migrations-dir": "./src/common/infra/migrations",
+  "esm": true
+}
