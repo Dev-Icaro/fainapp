@@ -12,10 +12,10 @@ export default class DeleteUserService implements IService<void> {
   ) {}
 
   public async execute(userId: number): Promise<void> {
-    const existsById = this.userRepo.getById(userId);
+    const existsById = await this.userRepo.existsById(userId);
     if (!existsById) {
       throw new AppException(
-        Helpers.formatErrorMessage(UserErrorMessages.USERS_NOT_FOUND, [userId]),
+        Helpers.formatErrorMessage(UserErrorMessages.USER_NOT_FOUND, [userId]),
       );
     }
     return this.userRepo.deleteUser(userId);

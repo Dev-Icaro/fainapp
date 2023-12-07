@@ -15,13 +15,18 @@ export default class GetUserByIdService implements IService<IUserDTO> {
 
   public async execute(userId: number): Promise<IUserDTO> {
     const user = await this.userRepo.getById(userId);
-    if (!user) {
+    if (user) {
+      return {
+        userId: user.userId,
+        mail: user.mail,
+        name: user.name,
+        password: user.password,
+      };
+    } else {
       throw new AppException(
-        Helpers.formatErrorMessage(UserErrorMessages.USERS_NOT_FOUND, [userId]),
+        Helpers.formatErrorMessage(UserErrorMessages.USER_NOT_FOUND, [userId]),
         HttpStatus.NOT_FOUND,
       );
     }
-
-    return user;
   }
 }

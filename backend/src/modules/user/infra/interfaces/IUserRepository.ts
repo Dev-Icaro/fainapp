@@ -12,5 +12,5 @@ export default interface IUserRepository {
   deleteUser(userId: number): Promise<void>;
   countUsers(): Promise<number>;
   existsByMail(mail: string): Promise<boolean>;
-  existsById(userId: string): Promise<boolean>;
+  existsById(userId: number): Promise<boolean>;
 }

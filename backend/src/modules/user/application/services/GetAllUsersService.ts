@@ -20,7 +20,14 @@ export default class GetAllUsersService implements IService<IUserPaginationDTO> 
         currentPage: paginationParams.page,
         perPage: paginationParams.perPage,
         total: totalUsersCount,
-        data: users,
+        data: users.map(user => {
+          return {
+            userId: user.userId,
+            mail: user.mail,
+            name: user.name,
+            password: user.password,
+          };
+        }),
       };
     } else {
       throw new AppException(UserErrorMessages.USERS_NOT_FOUND);

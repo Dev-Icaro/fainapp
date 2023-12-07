@@ -9,7 +9,7 @@ import IUpdateUserDTO from '@modules/user/domain/dtos/IUpdateUserDTO';
 export default class UserRepositoryImpl implements IUserRepository {
   constructor(private readonly client: PoolClient) {}
 
-  async existsById(userId: string): Promise<boolean> {
+  async existsById(userId: number): Promise<boolean> {
     const result = await this.client.query(
       `
       SELECT EXISTS(
@@ -75,7 +75,7 @@ export default class UserRepositoryImpl implements IUserRepository {
         mail,
         password,
         name,
-        creation_date,
+        creation_date
       ) VALUES (
         $1, $2, $3, $4
       )
@@ -113,8 +113,8 @@ export default class UserRepositoryImpl implements IUserRepository {
     const result = await this.client.query(
       `
       SELECT * FROM users
-      ${orderByClauses.length > 0 ? orderByClauses.join(',') : ''}
-      LIMIT $1 OFFSTE $2
+      ${orderByClauses.length > 0 ? `ORDER BY ${orderByClauses.join(',')}` : ''}
+      LIMIT $1 OFFSET $2
       `,
       [paginationParams.perPage, paginationParams.page * paginationParams.perPage],
     );
@@ -154,7 +154,7 @@ export default class UserRepositoryImpl implements IUserRepository {
   async deleteUser(userId: number): Promise<void> {
     await this.client.query(
       `
-      DELETE FROM users WHERE id = $1
+      DELETE FROM users WHERE user_id = $1
       `,
       [userId],
     );

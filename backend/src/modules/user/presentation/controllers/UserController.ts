@@ -22,7 +22,7 @@ export default class UserController {
     const userPaginationDTO = await this.userUseCases.getAllUsers({
       page,
       perPage,
-      orderBy: orderBy.split(','),
+      orderBy: orderBy ? orderBy.split(',') : [],
     });
 
     return response.json(userPaginationDTO);
