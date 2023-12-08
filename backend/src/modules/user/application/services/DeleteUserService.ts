@@ -13,7 +13,7 @@ export default class DeleteUserService implements IService<void> {
     const existsById = await userRepo.existsById(this.appContext.getClient(), userId);
     if (!existsById) {
       throw new AppException(
-        Helpers.formatErrorMessage(UserErrorMessages.USER_NOT_FOUND, [userId]),
+        Helpers.formatErrorMessage(UserErrorMessages.USER_NOT_FOUND_BY_ID, [userId]),
       );
     }
     return userRepo.deleteUser(this.appContext.getClient(), userId);

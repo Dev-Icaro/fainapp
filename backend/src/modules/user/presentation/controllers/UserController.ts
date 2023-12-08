@@ -1,10 +1,13 @@
+import TYPES from '@common/injections/types';
 import InputValidator, { DataTypes } from '@common/utils/InputValidator';
 import { HttpStatus } from '@common/utils/systemConstants';
 import IUserUseCases from '@modules/user/domain/use-cases/IUserUseCases';
 import { Request, Response } from 'express';
+import { inject, injectable } from 'inversify';
 
+@injectable()
 export default class UserController {
-  constructor(private readonly userUseCases: IUserUseCases) {}
+  constructor(@inject(TYPES.IUserUseCases) private readonly userUseCases: IUserUseCases) {}
 
   public async getById(request: Request, response: Response): Promise<Response> {
     let id = Number(request.params.id);

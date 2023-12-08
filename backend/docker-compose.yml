@@ -1,6 +1,6 @@
-version: '1.0'
+version: '2'
 services:
-  database:
+  postgres:
     image: postgres:16
     container_name: postgres_fainapp
     environment:
@@ -12,5 +12,14 @@ services:
     volumes:
       - postgres_fainapp:/var/lib/postgresql/data
 
+  redis:
+    image: redis
+    container_name: redis_fainapp
+    ports:
+      - 6380:6379
+    volumes:
+      - redis_data:/data
+
 volumes:
   postgres_fainapp:
+  redis_data:

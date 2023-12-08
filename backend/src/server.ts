@@ -1,16 +1,19 @@
 import 'reflect-metadata';
 import 'express-async-errors';
 import 'dotenv/config';
+import 'cookie-parser';
 import AppException from '@common/exceptions/AppException';
 import { HttpStatus } from '@common/utils/systemConstants';
 import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import routes from '@common/http/routes';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
+app.use(cookieParser());
 app.use(routes);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

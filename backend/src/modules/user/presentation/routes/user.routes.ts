@@ -1,11 +1,9 @@
 import { Router } from 'express';
 import UserController from '../controllers/UserController';
-import UserUseCasesImpl from '@modules/user/application/use-cases-impl/UserUseCasesImpl';
-
-const userUseCases = new UserUseCasesImpl();
-const userController = new UserController(userUseCases);
+import { container } from '@common/injections/inversify.config';
 
 const userRoutes = Router();
+const userController = container.resolve(UserController);
 
 userRoutes
   .route('/')

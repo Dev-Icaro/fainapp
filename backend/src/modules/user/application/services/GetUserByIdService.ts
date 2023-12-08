@@ -22,7 +22,7 @@ export default class GetUserByIdService implements IService<IUserDTO> {
       };
     } else {
       throw new AppException(
-        Helpers.formatErrorMessage(UserErrorMessages.USER_NOT_FOUND, [userId]),
+        Helpers.formatErrorMessage(UserErrorMessages.USER_NOT_FOUND_BY_ID, [userId]),
         HttpStatus.NOT_FOUND,
       );
     }
