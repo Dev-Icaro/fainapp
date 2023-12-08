@@ -11,7 +11,9 @@ import GetAllUsersService from '../services/GetAllUsersService';
 import CreateUserService from '../services/CreateUserService';
 import UpdateUserService from '../services/UpdateUserService';
 import DeleteUserService from '../services/DeleteUserService';
+import { injectable } from 'inversify';
 
+@injectable()
 export default class UserUseCasesImpl implements IUserUseCases {
   public async getUserById(userId: number): Promise<IUserDTO> {
     const appContext = new AppContext();

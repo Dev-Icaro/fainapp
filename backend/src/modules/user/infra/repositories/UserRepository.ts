@@ -5,12 +5,12 @@ import IUser from '@modules/user/domain/models/IUser';
 import Helpers from '@common/utils/Helpers';
 import IPaginationParams from '@common/interfaces/IPaginationParams';
 import IUpdateUserDTO from '@modules/user/domain/dtos/IUpdateUserDTO';
+import { injectable } from 'inversify';
 
+@injectable()
 export default class UserRepositoryImpl implements IUserRepository {
-  constructor(private readonly client: PoolClient) {}
-
-  async existsById(userId: number): Promise<boolean> {
-    const result = await this.client.query(
+  async existsById(client: PoolClient, userId: number): Promise<boolean> {
+    const result = await client.query(
       `
       SELECT EXISTS(
         SELECT 1 FROM users 
@@ -22,8 +22,8 @@ export default class UserRepositoryImpl implements IUserRepository {
     return result.rows[0].exists;
   }
 
-  async getUserByMail(mail: string): Promise<IUser> {
-    const result = await this.client.query(
+  async getUserByMail(client: PoolClient, mail: string): Promise<IUser> {
+    const result = await client.query(
       `
       SELECT * FROM users
       WHERE mail = $1
@@ -46,8 +46,8 @@ export default class UserRepositoryImpl implements IUserRepository {
     }
   }
 
-  async existsByMail(mail: string): Promise<boolean> {
-    const result = await this.client.query(
+  async existsByMail(client: PoolClient, mail: string): Promise<boolean> {
+    const result = await client.query(
       `
       SELECT EXISTS(
         SELECT 1 FROM users 
@@ -59,8 +59,8 @@ export default class UserRepositoryImpl implements IUserRepository {
     return result.rows[0].exists;
   }
 
-  async countUsers(): Promise<number> {
-    const result = await this.client.query(
+  async countUsers(client: PoolClient): Promise<number> {
+    const result = await client.query(
       `
       SELECT COUNT(*) AS TOTAL_COUNT FROM users
       `,
@@ -68,8 +68,8 @@ export default class UserRepositoryImpl implements IUserRepository {
     return parseInt(result.rows[0].total_count);
   }
 
-  async createUser(user: ICreateUserDTO): Promise<void> {
-    await this.client.query(
+  async createUser(client: PoolClient, user: ICreateUserDTO): Promise<void> {
+    await client.query(
       `
       INSERT INTO users (
         mail,
@@ -84,8 +84,8 @@ export default class UserRepositoryImpl implements IUserRepository {
     );
   }
 
-  async getById(userId: number): Promise<IUser> {
-    const result = await this.client.query(
+  async getById(client: PoolClient, userId: number): Promise<IUser> {
+    const result = await client.query(
       `
       SELECT * FROM users
       WHERE user_id = $1
@@ -108,9 +108,9 @@ export default class UserRepositoryImpl implements IUserRepository {
     }
   }
 
-  async getAllUsers(paginationParams: IPaginationParams): Promise<IUser[]> {
+  async getAllUsers(client: PoolClient, paginationParams: IPaginationParams): Promise<IUser[]> {
     const orderByClauses = Helpers.generateOrderByClauses(paginationParams.orderBy);
-    const result = await this.client.query(
+    const result = await client.query(
       `
       SELECT * FROM users
       ${orderByClauses.length > 0 ? `ORDER BY ${orderByClauses.join(',')}` : ''}
@@ -137,8 +137,8 @@ export default class UserRepositoryImpl implements IUserRepository {
     }
   }
 
-  async updateUser(user: IUpdateUserDTO): Promise<void> {
-    await this.client.query(
+  async updateUser(client: PoolClient, user: IUpdateUserDTO): Promise<void> {
+    await client.query(
       `UPDATE users SET 
         mail = $1,
         password = $2,
@@ -151,8 +151,8 @@ export default class UserRepositoryImpl implements IUserRepository {
     );
   }
 
-  async deleteUser(userId: number): Promise<void> {
-    await this.client.query(
+  async deleteUser(client: PoolClient, userId: number): Promise<void> {
+    await client.query(
       `
       DELETE FROM users WHERE user_id = $1
       `,

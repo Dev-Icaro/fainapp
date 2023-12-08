@@ -1,8 +1,9 @@
+import 'reflect-metadata';
+import 'express-async-errors';
+import 'dotenv/config';
 import AppException from '@common/exceptions/AppException';
 import { HttpStatus } from '@common/utils/systemConstants';
 import express, { NextFunction, Request, Response } from 'express';
-import 'express-async-errors';
-import 'dotenv/config';
 import cors from 'cors';
 import routes from '@common/http/routes';
 
