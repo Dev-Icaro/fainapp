@@ -5,7 +5,6 @@ import IUpdateUserDTO from '@modules/user/domain/dtos/IUpdateUserDTO';
 import IUserDTO from '@modules/user/domain/dtos/IUserDTO';
 import IUserPaginationDTO from '@modules/user/domain/dtos/IUserPaginationDTO';
 import IUserUseCases from '@modules/user/domain/use-cases/IUserUseCases';
-import UserRepositoryImpl from '@modules/user/infra/repositories/UserRepository';
 import GetUserByIdService from '../services/GetUserByIdService';
 import GetAllUsersService from '../services/GetAllUsersService';
 import CreateUserService from '../services/CreateUserService';
@@ -19,10 +18,7 @@ export default class UserUseCasesImpl implements IUserUseCases {
     const appContext = new AppContext();
     try {
       await appContext.beginTransaction();
-      const getUserByIdService = new GetUserByIdService(
-        appContext,
-        new UserRepositoryImpl(appContext.getClient()),
-      );
+      const getUserByIdService = new GetUserByIdService(appContext);
       const userDTO = await getUserByIdService.execute(userId);
       await appContext.commit();
       return userDTO;
@@ -38,10 +34,7 @@ export default class UserUseCasesImpl implements IUserUseCases {
     const appContext = new AppContext();
     try {
       await appContext.beginTransaction();
-      const getAllUsersService = new GetAllUsersService(
-        appContext,
-        new UserRepositoryImpl(appContext.getClient()),
-      );
+      const getAllUsersService = new GetAllUsersService(appContext);
       const userPaginationDTO = await getAllUsersService.execute(paginationParams);
       await appContext.commit();
       return userPaginationDTO;
@@ -57,10 +50,7 @@ export default class UserUseCasesImpl implements IUserUseCases {
     const appContext = new AppContext();
     try {
       await appContext.beginTransaction();
-      const createUserService = new CreateUserService(
-        appContext,
-        new UserRepositoryImpl(appContext.getClient()),
-      );
+      const createUserService = new CreateUserService(appContext);
       await createUserService.execute(createUserDTO);
       await appContext.commit();
     } catch (error) {
@@ -75,10 +65,7 @@ export default class UserUseCasesImpl implements IUserUseCases {
     const appContext = new AppContext();
     try {
       await appContext.beginTransaction();
-      const updateUserService = new UpdateUserService(
-        appContext,
-        new UserRepositoryImpl(appContext.getClient()),
-      );
+      const updateUserService = new UpdateUserService(appContext);
       await updateUserService.execute(updateUserDTO);
       await appContext.commit();
     } catch (error) {
@@ -93,10 +80,7 @@ export default class UserUseCasesImpl implements IUserUseCases {
     const appContext = new AppContext();
     try {
       await appContext.beginTransaction();
-      const deleteUserService = new DeleteUserService(
-        appContext,
-        new UserRepositoryImpl(appContext.getClient()),
-      );
+      const deleteUserService = new DeleteUserService(appContext);
       await deleteUserService.execute(userId);
       await appContext.commit();
     } catch (error) {
