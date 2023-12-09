@@ -7,7 +7,7 @@ exports.up = pgm => {
     ` CREATE TABLE users (
       user_id SERIAL PRIMARY KEY,
       mail VARCHAR(50),
-      password VARCHAR(50),
+      password VARCHAR(200),
       name VARCHAR(50),
       creation_date TIMESTAMP,
       update_date TIMESTAMP

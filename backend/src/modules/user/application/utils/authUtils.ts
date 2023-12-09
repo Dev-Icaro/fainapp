@@ -9,7 +9,7 @@ interface AccessTokenPayload extends JwtPayload, IUserTokenInfo {}
 
 export const createAccessToken = (user: IUserTokenInfo) => {
   return jwt.sign(
-    { name: user.name, email: user.email, userId: user.userId },
+    { name: user.name, mail: user.mail, userId: user.userId },
     process.env.ACCESS_TOKEN_SECRET!,
     {
       audience: 'urn:jwt:type:access',
@@ -50,6 +50,17 @@ export const withRefreshAuth = (req: Request, res: Response, next: NextFunction)
 export const withAccessAuth = (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers['authorization']?.split('Bearer ')[1];
   if (!token) {
+    return res.status(HttpStatus.UNAUTHORIZED).send(AuthErrorMessages.UNAUTHORIZED);
+  }
+
+  try {
+    const { name, mail, userId } = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET!, {
+      audience: 'urn:jwt:type:access',
+    }) as AccessTokenPayload;
+
+    res.locals.user = { name, mail, userId };
+    next();
+  } catch (error) {
     return res.status(HttpStatus.UNAUTHORIZED).send(AuthErrorMessages.UNAUTHORIZED);
   }
 };

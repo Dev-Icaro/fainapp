@@ -10,6 +10,12 @@ import { UserErrorMessages } from '@modules/user/domain/error-messages/UserError
 import ITokenInfo from '@modules/user/domain/models/ITokenInfo';
 import IUserRepository from '@modules/user/infra/interfaces/IUserRepository';
 import bcrypt from 'bcrypt';
+import {
+  createAccessToken,
+  createHashForRefreshToken,
+  createRefreshToken,
+} from '../utils/authUtils';
+import redisCache from '@common/cache/RedisCache';
 
 export default class LoginService implements IService<ITokenInfo> {
   constructor(private readonly appContext: AppContext) {}
@@ -30,5 +36,13 @@ export default class LoginService implements IService<ITokenInfo> {
     if (!bcrypt.compareSync(userCredentialsDTO.password, user.password)) {
       throw new AppException(AuthErrorMessages.INVALID_CREDENTIALS, HttpStatus.UNAUTHORIZED);
     }
+
+    const accessToken = createAccessToken(user);
+    const refreshToken = createRefreshToken(user.mail);
+    const refreshTokenHash = createHashForRefreshToken(refreshToken);
+
+    await redisCache.getClient().set(refreshTokenHash, user.mail, 'EX', 8 * 60 * 60);
+
+    return { accessToken, refreshToken };
   }
 }

@@ -2,18 +2,18 @@ import { Router } from 'express';
 import UserController from '../controllers/UserController';
 import { container } from '@common/injections/inversify.config';
 
-const userRoutes = Router();
+const userRouter = Router();
 const userController = container.resolve(UserController);
 
-userRoutes
+userRouter
   .route('/')
   .get(userController.getAll.bind(userController))
   .post(userController.create.bind(userController));
 
-userRoutes
+userRouter
   .route('/:id')
   .get(userController.getById.bind(userController))
   .put(userController.update.bind(userController))
   .delete(userController.delete.bind(userController));
 
-export default userRoutes;
+export default userRouter;

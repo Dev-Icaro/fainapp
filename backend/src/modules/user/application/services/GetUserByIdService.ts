@@ -18,7 +18,6 @@ export default class GetUserByIdService implements IService<IUserDTO> {
         userId: user.userId,
         mail: user.mail,
         name: user.name,
-        password: user.password,
       };
     } else {
       throw new AppException(

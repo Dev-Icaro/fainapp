@@ -3,8 +3,10 @@ import IService from '@common/interfaces/IService';
 import AppContext from '@common/utils/AppContext';
 import Helpers from '@common/utils/Helpers';
 import RepositoryFactory from '@common/utils/RepositoryFactory';
+import { BCRYPT_SALT_ROUNDS } from '@common/utils/systemConstants';
 import ICreateUserDTO from '@modules/user/domain/dtos/ICreateUserDTO';
 import { UserErrorMessages } from '@modules/user/domain/error-messages/UserErrorMessages';
+import bcrypt from 'bcrypt';
 
 export default class CreateUserService implements IService<void> {
   constructor(private readonly appContext: AppContext) {}
@@ -22,6 +24,7 @@ export default class CreateUserService implements IService<void> {
         ]),
       );
     }
+    createUserDTO.password = await bcrypt.hash(createUserDTO.password, BCRYPT_SALT_ROUNDS);
     return userRepo.createUser(this.appContext.getClient(), createUserDTO);
   }
 }

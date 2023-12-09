@@ -23,7 +23,6 @@ export default class GetAllUsersService implements IService<IUserPaginationDTO> 
             userId: user.userId,
             mail: user.mail,
             name: user.name,
-            password: user.password,
           };
         }),
       };

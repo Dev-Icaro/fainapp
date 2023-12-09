@@ -1,6 +1,6 @@
 export default interface IUpdateUserDTO {
   userId: number;
   mail: string;
-  password: string;
+  password?: string;
   name: string;
 }

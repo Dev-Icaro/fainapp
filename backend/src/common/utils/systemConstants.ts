@@ -7,3 +7,7 @@ export enum HttpStatus {
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,
 }
+
+const BCRYPT_SALT_ROUNDS = 10;
+
+export { BCRYPT_SALT_ROUNDS };

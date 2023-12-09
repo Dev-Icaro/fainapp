@@ -16,9 +16,10 @@ services:
     image: redis
     container_name: redis_fainapp
     ports:
-      - 6380:6379
+      - 6379:6379
     volumes:
       - redis_data:/data
+    
 
 volumes:
   postgres_fainapp:
