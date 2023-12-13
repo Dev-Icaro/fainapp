@@ -5,12 +5,15 @@
   padding: 2rem 2rem;
   background-color: $background-color-light;
   height: 100%;
-  
-  @media screen and (min-width: $desktop_xsm) {
+
+  @media all and (max-width: $mobile) {
+    width: 100%;
+  }
+
+  @media all and (min-width: $mobile) {
     width: 40%;
     align-self: flex-end;
-    border-radius: 2rem 0 0 2rem ;
+    border-radius: 2rem 0 0 2rem;
+    max-width: 450px;
   }
 }
-
-

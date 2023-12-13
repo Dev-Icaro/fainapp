@@ -1,0 +1,31 @@
+@import 'styles/variables';
+
+.button {
+  padding: 1rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: linear 0.2s;
+
+  &__filled {
+    border: 0px;
+    color: $background-color-light;
+    background-color: $blue-light;
+
+    &:hover {
+      background: $blue-dark;
+    }
+  }
+
+  &__outlined {
+    background-color: transparent;
+    border: 2px solid $blue-light;
+    color: $blue-light;
+
+    &:hover {
+      color: $blue-dark;
+    }
+  }
+}

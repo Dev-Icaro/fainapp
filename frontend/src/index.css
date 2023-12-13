@@ -1,14 +1,24 @@
 body {
-  background-color: #C5C5C5;
+  background-color: #c5c5c5;
+  font-family: 'Roboto', sans-serif;
 }
 
-main, body, html, #root {
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+main,
+body,
+html,
+#root {
   height: 100%;
   width: 100%;
 }
 
 #root > main.container {
   display: flex;
-  flex-direction: column; 
-  min-height: 100vh; 
+  flex-direction: column;
+  min-height: 100vh;
 }

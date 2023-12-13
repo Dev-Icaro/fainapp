@@ -1,0 +1,60 @@
+@import 'styles/variables';
+@import 'styles/breakpoints';
+
+.loginContainer {
+  display: flex;
+  height: 100%;
+
+  @media all and (max-width: $mobile) {
+    &__art {
+      display: none;
+
+      svg {
+        display: none;
+      }
+    }
+  }
+
+  @media all and (min-width: $mobile) {
+    &__art {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+
+      svg {
+        width: 100%;
+        height: auto;
+        max-width: 400px;
+        max-height: 400px;
+      }
+    }
+  }
+
+  &__loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    p {
+      text-align: center;
+    }
+
+    strong {
+      margin: 20px 0;
+    }
+  }
+
+  &__forgotPassword {
+    position: relative;
+    top: -10px;
+    color: $blue-light;
+    text-align: right;
+    width: 100%;
+
+    &:hover {
+      color: $blue-dark;
+    }
+  }
+}
