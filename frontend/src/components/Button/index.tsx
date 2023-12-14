@@ -1,23 +1,25 @@
 import classNames from 'classnames';
 import styles from './Button.module.scss';
+import { ReactNode } from 'react';
 
 type ButtonVariants = 'filled' | 'outlined';
 
 interface ButtonProps {
-  text: string;
   type: 'submit' | 'reset' | 'button' | undefined;
   variant?: ButtonVariants;
+  children?: ReactNode;
+  className?: string;
 }
 
-const Button = ({ text, type, variant }: ButtonProps) => {
-  const classes = classNames(styles.button, {
+const Button = ({ children, type, variant, className }: ButtonProps) => {
+  const classes = classNames(styles.button, className, {
     [styles.button__filled]: variant === 'filled',
     [styles.button__outlined]: variant === 'outlined',
   });
 
   return (
     <button className={classes} type={type}>
-      {text}
+      {children}
     </button>
   );
 };

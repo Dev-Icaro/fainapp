@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginForm from 'pages/LoginForm';
 import AuthBasePage from 'pages/AuthBasePage';
+import RegisterForm from 'pages/RegisterForm';
 
 const AppRouter = () => {
   return (
@@ -9,6 +10,7 @@ const AppRouter = () => {
         <Routes>
           <Route path="/auth" element={<AuthBasePage />}>
             <Route path="login" element={<LoginForm />} />
+            <Route path="register" element={<RegisterForm />} />
           </Route>
         </Routes>
       </Router>

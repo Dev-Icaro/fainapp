@@ -18,9 +18,15 @@ const LoginForm = () => {
       <Link className={styles.loginForm__forgotPassword} to={'/forgot-password'}>
         Esqueceu sua senha?
       </Link>
-      <Button type="submit" text="Logar" variant="filled" />
+      <Button type="submit" variant="filled">
+        Logar
+      </Button>
       <p>OU</p>
-      <Button type="submit" text="Registrar-se" variant="outlined" />
+      <Link className={styles.loginForm__registerButton} to={'/auth/register'}>
+        <Button type="submit" variant="outlined">
+          Registar-se
+        </Button>
+      </Link>
     </form>
   );
 };

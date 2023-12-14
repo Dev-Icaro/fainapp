@@ -35,6 +35,7 @@
   &__authPanel {
     background-color: $background-color-light;
     height: 100%;
+    padding: 2rem 2rem;
 
     @media all and (max-width: $mobile) {
       width: 100%;

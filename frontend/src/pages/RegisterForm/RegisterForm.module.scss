@@ -1,0 +1,14 @@
+@import 'styles/breakpoints';
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  strong {
+    margin: 10px 0;
+  }
+}
