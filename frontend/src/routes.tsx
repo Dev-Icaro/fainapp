@@ -1,12 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginPage from 'pages/LoginPage';
+import LoginForm from 'pages/LoginForm';
+import AuthBasePage from 'pages/AuthBasePage';
 
 const AppRouter = () => {
   return (
     <main className="container">
       <Router>
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/auth" element={<AuthBasePage />}>
+            <Route path="login" element={<LoginForm />} />
+          </Route>
         </Routes>
       </Router>
     </main>
