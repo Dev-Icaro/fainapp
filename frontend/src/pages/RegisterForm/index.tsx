@@ -31,6 +31,7 @@ const RegisterForm = () => {
       .post('user', userData)
       .then(data => console.log(data))
       .catch(err => {
+        if err.
         const errorMessage = err.response.data.message;
         setErrorMessage(errorMessage);
       });
