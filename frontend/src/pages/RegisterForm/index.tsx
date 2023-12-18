@@ -10,8 +10,8 @@ import { useCreateUser } from 'common/hooks/queries/useCreateUser';
 
 const RegisterForm = () => {
   const [errorMessage, setErrorMessage] = useState('');
-  const { mutate, isLoading } = useCreateUser();
   const methods = useForm();
+  const { mutate, isLoading } = useCreateUser();
 
   const handleSubmit = methods.handleSubmit(data => {
     const arePasswordsEqual = data.password === data.passwordRepeat;

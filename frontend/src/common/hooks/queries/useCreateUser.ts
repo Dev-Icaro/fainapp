@@ -7,7 +7,7 @@ interface ICreateUserParams {
   name: string;
 }
 
-export function useCreateUser((options?: MutationOptions<any, unknown, ICreateUserParams>) => void){
+export function useCreateUser((options?: MutationOptions<any, unknown, ICreateUserParams>) => void) {
   return useMutation(async (userData: ICreateUserParams) => {
     const response = await api.post('/user', userData);
     return response.data;
