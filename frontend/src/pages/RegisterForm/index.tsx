@@ -6,9 +6,11 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { inputEmailValidation } from 'common/utils/inputValidations';
 import api from 'services/api';
 import { useState } from 'react';
+import { useCreateUser } from 'common/hooks/queries/useCreateUser';
 
 const RegisterForm = () => {
   const [errorMessage, setErrorMessage] = useState('');
+  const { mutate, isLoading } = useCreateUser();
   const methods = useForm();
 
   const handleSubmit = methods.handleSubmit(data => {
@@ -27,13 +29,23 @@ const RegisterForm = () => {
       name: data.name,
     };
 
+    try {
+      await createUserMutation.mutateAsync();
+    } catch (error) {}
+
     api
       .post('user', userData)
-      .then(data => console.log(data))
-      .catch(err => {
-        if err.
-        const errorMessage = err.response.data.message;
-        setErrorMessage(errorMessage);
+      .then(dataIgnored => {
+        methods.reset();
+        setErrorMessage('');
+      })
+      .catch(error => {
+        if (error.response) {
+          const errorMessage = error.response.data.message;
+          setErrorMessage(errorMessage);
+        } else {
+          setErrorMessage(error.message);
+        }
       });
   });
 
@@ -42,7 +54,7 @@ const RegisterForm = () => {
       <form className={styles.registerForm} onSubmit={handleSubmit}>
         <Logo width={64} height={64} />
         <strong>Bem-vindo! Cadastre sua conta para começarmos</strong>
-        {errorMessage && <div>{errorMessage}</div>}
+        {errorMessage && <div className={styles.registerForm__errorMessage}>{errorMessage}</div>}
         <InputText
           id="email"
           label="Endereço de email"
