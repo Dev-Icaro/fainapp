@@ -3,27 +3,36 @@ import InputText from 'components/InputText';
 import { Link } from 'react-router-dom';
 import styles from './LoginPage.module.scss';
 import { ReactComponent as Logo } from 'assets/logo.svg';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider } from 'react-hook-form';
+// import stylesTheme from 'styles/Theme.module.scss';
+import useLogin from 'hooks/useLogin';
+import { inputEmailValidation } from 'utils/inputValidations';
 
 const LoginForm = () => {
-  const methods = useForm();
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
-    e.preventDefault();
-  }
+  const { handleSubmit, methods } = useLogin();
 
   return (
     <FormProvider {...methods}>
       <form className={styles.loginForm} onSubmit={handleSubmit}>
         <Logo width={64} height={64} />
         <strong>Bem-vindo de volta! Logue-se na sua conta.</strong>
+        {/* {apiError && <div className={stylesTheme.error}>{apiError}</div>} */}
         <InputText
-          id="email"
+          id="mail"
           label="Endereço de email"
           type="email"
           placeholder="Insira seu email"
+          maxLength={50}
+          {...inputEmailValidation}
         />
-        <InputText id="pass" label="Senha" type="password" placeholder="Insira sua senha" />
+        <InputText
+          id="password"
+          label="Senha"
+          type="password"
+          placeholder="Insira sua senha"
+          maxLength={50}
+          validations={{ required: { value: true, message: 'Senha é obrigatória' } }}
+        />
         <Link className={styles.loginForm__forgotPassword} to={'/forgot-password'}>
           Esqueceu sua senha?
         </Link>

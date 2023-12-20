@@ -1,62 +1,23 @@
 import { ReactComponent as Logo } from 'assets/logo.svg';
 import styles from './RegisterForm.module.scss';
+import stylesTheme from 'styles/Theme.module.scss';
 import InputText from 'components/InputText';
 import Button from 'components/Button';
-import { useForm, FormProvider } from 'react-hook-form';
-import { inputEmailValidation } from 'common/utils/inputValidations';
-import api from 'services/api';
-import { useState } from 'react';
-import { useCreateUser } from 'common/hooks/queries/useCreateUser';
+import { FormProvider } from 'react-hook-form';
+import { inputEmailValidation } from 'utils/inputValidations';
+import useRegisterUser from 'hooks/useRegisterUser';
 
 const RegisterForm = () => {
-  const [errorMessage, setErrorMessage] = useState('');
-  const methods = useForm();
-  const { mutate, isLoading } = useCreateUser();
-
-  const handleSubmit = methods.handleSubmit(data => {
-    const arePasswordsEqual = data.password === data.passwordRepeat;
-    if (!arePasswordsEqual) {
-      methods.setError('passwordRepeat', {
-        type: 'manual',
-        message: 'As senhas devem ser iguais',
-      });
-      return;
-    }
-
-    const userData = {
-      mail: data.email,
-      password: data.password,
-      name: data.name,
-    };
-
-    try {
-      await createUserMutation.mutateAsync();
-    } catch (error) {}
-
-    api
-      .post('user', userData)
-      .then(dataIgnored => {
-        methods.reset();
-        setErrorMessage('');
-      })
-      .catch(error => {
-        if (error.response) {
-          const errorMessage = error.response.data.message;
-          setErrorMessage(errorMessage);
-        } else {
-          setErrorMessage(error.message);
-        }
-      });
-  });
+  const { methods, handleSubmit, apiError } = useRegisterUser();
 
   return (
     <FormProvider {...methods}>
       <form className={styles.registerForm} onSubmit={handleSubmit}>
         <Logo width={64} height={64} />
         <strong>Bem-vindo! Cadastre sua conta para começarmos</strong>
-        {errorMessage && <div className={styles.registerForm__errorMessage}>{errorMessage}</div>}
+        {apiError && <div className={stylesTheme.error}>{apiError}</div>}
         <InputText
-          id="email"
+          id="mail"
           label="Endereço de email"
           type="email"
           placeholder="Insira seu email"
