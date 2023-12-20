@@ -4,8 +4,8 @@ import stylesTheme from 'styles/Theme.module.scss';
 import InputText from 'components/InputText';
 import Button from 'components/Button';
 import { FormProvider } from 'react-hook-form';
-import { inputEmailValidation } from 'utils/inputValidations';
-import useRegisterUser from 'hooks/useRegisterUser';
+import { inputEmailValidation } from 'common/utils/inputValidations';
+import useRegisterUser from 'pages/RegisterForm/hooks/useRegisterUser';
 
 const RegisterForm = () => {
   const { methods, handleSubmit, apiError } = useRegisterUser();

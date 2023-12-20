@@ -2,8 +2,8 @@ import { HTMLInputTypeAttribute } from 'react';
 import styles from './InputText.module.scss';
 import classNames from 'classnames';
 import { FieldValues, RegisterOptions, useFormContext } from 'react-hook-form';
-import { findInputError } from 'utils/findInputError';
-import { isInputInvalid } from 'utils/isInputInvalid';
+import { findInputError } from 'common/utils/findInputError';
+import { isInputInvalid } from 'common/utils/isInputInvalid';
 
 interface InputTextProps {
   id: string;

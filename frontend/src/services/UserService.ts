@@ -1,4 +1,4 @@
-import HttpResponse from 'types/HttpResponse';
+import HttpResponse from 'common/interfaces/HttpResponse';
 import api from './api';
 import axios from 'axios';
 import ApiException from 'common/exceptions/ApiException';
