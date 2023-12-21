@@ -5,18 +5,22 @@ import styles from './LoginPage.module.scss';
 import { ReactComponent as Logo } from 'assets/logo.svg';
 import { FormProvider } from 'react-hook-form';
 import stylesTheme from 'styles/Theme.module.scss';
-import useLogin from 'pages/LoginForm/hooks/useLogin';
+import useLoginForm from 'pages/LoginForm/hooks/useLoginForm';
 import { inputEmailValidation } from 'common/utils/inputValidations';
 
 const LoginForm = () => {
-  const { handleSubmit, methods, apiError } = useLogin();
+  const { handleSubmit, methods, mutation } = useLoginForm();
+
+  if (mutation.isLoading) {
+    return <div>Carregando ...</div>;
+  }
 
   return (
     <FormProvider {...methods}>
       <form className={styles.loginForm} onSubmit={handleSubmit}>
         <Logo width={64} height={64} />
         <strong>Bem-vindo de volta! Logue-se na sua conta.</strong>
-        {apiError && <div className={stylesTheme.error}>{apiError}</div>}
+        {mutation.error && <div className={stylesTheme.error}>{mutation.error.message}</div>}
         <InputText
           id="mail"
           label="Endereço de email"
