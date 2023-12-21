@@ -1,4 +1,3 @@
-import HttpResponse from 'common/interfaces/HttpResponse';
 import api from './api';
 import axios from 'axios';
 import ApiException from 'common/exceptions/ApiException';
@@ -15,15 +14,9 @@ interface UserCredentials {
 }
 
 export default class UserService {
-  public static async signup(
-    registerUserParams: RegisterUserParams,
-  ): Promise<HttpResponse | undefined> {
+  public static async signup(registerUserParams: RegisterUserParams): Promise<void> {
     try {
-      const response = await api.post('user', registerUserParams);
-      return {
-        statusCode: response.status,
-        data: response.data,
-      };
+      await api.post('user', registerUserParams);
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {
         const errorMessage = err.response.data.message;
@@ -33,13 +26,11 @@ export default class UserService {
     }
   }
 
-  public static async login(userCredentials: UserCredentials): Promise<HttpResponse | undefined> {
+  public static async login(userCredentials: UserCredentials): Promise<string | null> {
     try {
       const response = await api.post('auth/login', userCredentials);
-      return {
-        statusCode: response.status,
-        data: response.data,
-      };
+      const { accessToken } = response.data;
+      return accessToken;
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {
         const errorMessage = err.response.data.message;
@@ -47,5 +38,7 @@ export default class UserService {
         throw new ApiException(errorMessage, statusCode);
       }
     }
+
+    return null;
   }
 }

@@ -1,5 +1,5 @@
 import ApiException from 'common/exceptions/ApiException';
-import useUserStore from 'common/hooks/useUserStore';
+import useUserStore from 'store/useUserStore';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import UserService from 'services/UserService';
@@ -7,17 +7,20 @@ import UserService from 'services/UserService';
 const useLogin = () => {
   const methods = useForm();
   const [apiError, setApiError] = useState('');
+  const { setAccessToken } = useUserStore();
 
   const handleSubmit = methods.handleSubmit(async (data: any) => {
-    const setAccessToken = useUserStore(state => state.setAccessToken);
-
     try {
-      const response = await UserService.login({
+      const accessToken = await UserService.login({
         mail: data.mail,
         password: data.password,
       });
 
-      setAccessToken(response?.data?.accessToken);
+      if (!accessToken) {
+        throw new Error('Falha na autenticação');
+      }
+
+      setAccessToken(accessToken);
       setApiError('');
     } catch (err) {
       if (err instanceof ApiException) {
