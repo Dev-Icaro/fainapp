@@ -1,17 +1,17 @@
-import IUser from 'models/IUser';
+import IUserDTO from 'domain/user/dtos/IUserDTO';
 import { create } from 'zustand';
 
 interface UserStore {
-  user: IUser | null;
+  user: IUserDTO | null;
   accessToken: string;
-  setUser: (user: IUser) => void;
+  setUser: (user: IUserDTO) => void;
   setAccessToken: (accessToken: string) => void;
 }
 
 const useUserStore = create<UserStore>(set => ({
   user: null,
   accessToken: '',
-  setUser: (user: IUser) => {
+  setUser: (user: IUserDTO) => {
     set(stateIgnored => ({
       user: user,
     }));

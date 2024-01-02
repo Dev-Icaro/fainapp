@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import useUserStore from 'store/useUserStore';
+import useUserStore from 'stores/useUserStore';
 import { LoginResult, UserCredentials } from 'services/AuthService';
 import { useMutation } from 'react-query';
 import api from 'services/api';

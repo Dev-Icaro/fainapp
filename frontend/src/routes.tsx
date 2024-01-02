@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginForm from 'pages/LoginForm';
-import AuthBasePage from 'pages/AuthBasePage';
-import RegisterForm from 'pages/RegisterForm';
+import LoginForm from 'presentation/views/auth/LoginForm';
+import AuthBasePage from 'presentation/views/auth/AuthBasePage';
+import RegisterForm from 'presentation/views/auth/RegisterForm';
 
 const AppRouter = () => {
   return (
