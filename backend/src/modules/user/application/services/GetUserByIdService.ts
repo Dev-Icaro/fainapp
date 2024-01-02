@@ -12,7 +12,7 @@ export default class GetUserByIdService implements IService<IUserDTO> {
 
   public async execute(userId: number): Promise<IUserDTO> {
     const userRepo = RepositoryFactory.getUserRepository();
-    const user = await userRepo.getById(this.appContext.getClient(), userId);
+    const user = await userRepo.getUserById(this.appContext.getClient(), userId);
     if (user) {
       return {
         userId: user.userId,

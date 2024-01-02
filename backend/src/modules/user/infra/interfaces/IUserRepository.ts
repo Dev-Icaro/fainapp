@@ -5,7 +5,7 @@ import IUser from '@modules/user/domain/models/IUser';
 import { PoolClient } from 'pg';
 
 export default interface IUserRepository {
-  getById(client: PoolClient, userId: number): Promise<IUser>;
+  getUserById(client: PoolClient, userId: number): Promise<IUser>;
   getUserByMail(client: PoolClient, mail: string): Promise<IUser>;
   getAllUsers(client: PoolClient, paginationParams: IPaginationParams): Promise<IUser[]>;
   createUser(client: PoolClient, user: ICreateUserDTO): Promise<void>;

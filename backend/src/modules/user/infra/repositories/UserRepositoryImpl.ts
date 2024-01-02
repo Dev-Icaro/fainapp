@@ -84,7 +84,7 @@ export default class UserRepositoryImpl implements IUserRepository {
     );
   }
 
-  async getById(client: PoolClient, userId: number): Promise<IUser> {
+  async getUserById(client: PoolClient, userId: number): Promise<IUser> {
     const result = await client.query(
       `
       SELECT * FROM users

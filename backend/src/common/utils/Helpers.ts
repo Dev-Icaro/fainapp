@@ -25,4 +25,8 @@ export default class Helpers {
   public static stringMatchesEnumValue(value: string, enumType: any): boolean {
     return Object.values(enumType).includes(value as any);
   }
+
+  public static generateRandomNumber(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 }

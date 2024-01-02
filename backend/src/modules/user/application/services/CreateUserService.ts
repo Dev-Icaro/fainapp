@@ -7,6 +7,8 @@ import { BCRYPT_SALT_ROUNDS } from '@common/utils/systemConstants';
 import ICreateUserDTO from '@modules/user/domain/dtos/ICreateUserDTO';
 import { UserErrorMessages } from '@modules/user/domain/error-messages/UserErrorMessages';
 import bcrypt from 'bcrypt';
+import SendVerificationEmailService from './SendVerificationEmailService';
+import RedisCache from '@common/cache/RedisCache';
 
 export default class CreateUserService implements IService<void> {
   constructor(private readonly appContext: AppContext) {}
@@ -24,7 +26,19 @@ export default class CreateUserService implements IService<void> {
         ]),
       );
     }
+
     createUserDTO.password = await bcrypt.hash(createUserDTO.password, BCRYPT_SALT_ROUNDS);
-    return userRepo.createUser(this.appContext.getClient(), createUserDTO);
+    await userRepo.createUser(this.appContext.getClient(), createUserDTO);
+
+    try {
+      const verificationCode = Helpers.generateRandomNumber(1000, 9999);
+      await new SendVerificationEmailService().execute({
+        mail: createUserDTO.mail,
+        verificationCode: verificationCode,
+      });
+      await RedisCache.getClient().set(createUserDTO.mail, verificationCode, 'EX', 10 * 60);
+    } catch (error) {
+      throw new AppException('Falha no envio de email');
+    }
   }
 }
