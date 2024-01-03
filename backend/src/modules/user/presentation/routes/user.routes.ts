@@ -8,7 +8,7 @@ const userController = container.resolve(UserController);
 userRouter
   .route('/')
   .get(userController.getAll.bind(userController))
-  .post(userController.create.bind(userController));
+  .post(userController.signup.bind(userController));
 
 userRouter
   .route('/:id')

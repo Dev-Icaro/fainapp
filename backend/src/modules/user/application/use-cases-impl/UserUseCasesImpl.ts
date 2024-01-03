@@ -1,19 +1,24 @@
 import IPaginationParams from '@common/interfaces/IPaginationParams';
 import AppContext from '@common/utils/AppContext';
-import ICreateUserDTO from '@modules/user/domain/dtos/ICreateUserDTO';
 import IUpdateUserDTO from '@modules/user/domain/dtos/IUpdateUserDTO';
 import IUserDTO from '@modules/user/domain/dtos/IUserDTO';
 import IUserPaginationDTO from '@modules/user/domain/dtos/IUserPaginationDTO';
 import IUserUseCases from '@modules/user/domain/use-cases/IUserUseCases';
 import GetUserByIdService from '../services/GetUserByIdService';
 import GetAllUsersService from '../services/GetAllUsersService';
-import CreateUserService from '../services/CreateUserService';
 import UpdateUserService from '../services/UpdateUserService';
 import DeleteUserService from '../services/DeleteUserService';
 import { injectable } from 'inversify';
+import ISignupDTO from '@modules/user/domain/dtos/ISignupDTO';
+import ServiceExecutor from '@common/utils/ServiceExecutor';
+import SignupService from '../services/SignupService';
 
 @injectable()
 export default class UserUseCasesImpl implements IUserUseCases {
+  public async signup(signupDTO: ISignupDTO): Promise<void> {
+    return ServiceExecutor.execute<void>(SignupService, signupDTO);
+  }
+
   public async getUserById(userId: number): Promise<IUserDTO> {
     const appContext = new AppContext();
     try {
@@ -38,21 +43,6 @@ export default class UserUseCasesImpl implements IUserUseCases {
       const userPaginationDTO = await getAllUsersService.execute(paginationParams);
       await appContext.commit();
       return userPaginationDTO;
-    } catch (error) {
-      await appContext.rollback();
-      throw error;
-    } finally {
-      appContext.release();
-    }
-  }
-
-  public async createUser(createUserDTO: ICreateUserDTO): Promise<void> {
-    const appContext = new AppContext();
-    try {
-      await appContext.beginTransaction();
-      const createUserService = new CreateUserService(appContext);
-      await createUserService.execute(createUserDTO);
-      await appContext.commit();
     } catch (error) {
       await appContext.rollback();
       throw error;
