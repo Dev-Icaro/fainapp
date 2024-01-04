@@ -7,13 +7,13 @@ import UserRepositoryImpl from '@modules/user/infra/repositories/UserRepositoryI
 import IAuthUseCases from '@modules/user/domain/use-cases/IAuthUseCases';
 import AuthUseCasesImpl from '@modules/user/application/use-cases-impl/AuthUseCasesImpl';
 import IEmailSender from '@common/interfaces/IEmailSender';
-import { NodemailerEmailSender } from '@common/utils/NodemailerEmailSender';
+import EmailSender from '@common/utils/EmailSenderImpl';
 
 const container = new Container();
 
 container.bind<IUserUseCases>(TYPES.IUserUseCases).to(UserUseCasesImpl).inSingletonScope();
 container.bind<IUserRepository>(TYPES.IUserRepository).to(UserRepositoryImpl).inSingletonScope();
 container.bind<IAuthUseCases>(TYPES.IAuthUseCases).to(AuthUseCasesImpl).inSingletonScope();
-container.bind<IEmailSender>(TYPES.IEmailSender).to(NodemailerEmailSender).inSingletonScope();
+container.bind<IEmailSender>(TYPES.IEmailSender).to(EmailSender).inSingletonScope();
 
 export { container };

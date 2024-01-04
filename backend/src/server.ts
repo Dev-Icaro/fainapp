@@ -24,6 +24,7 @@ app.use((error: Error, request: Request, response: Response, _next: NextFunction
       message: error.message,
     });
   } else {
+    console.error(error);
     return response.status(HttpStatus.SERVER_ERROR).json({
       status: 'error',
       message: 'Internal server error',
