@@ -1,7 +1,7 @@
-import IPaginationParams from 'interfaces/IPaginationParams';
-import IService from 'interfaces/IService';
-import RepositoryFactory from 'utils/RepositoryFactory';
-import IUserDTO from 'domain/user/dtos/IUserDTO';
+import IPaginationParams from '@interfaces/IPaginationParams';
+import IService from '@interfaces/IService';
+import RepositoryFactory from 'src/utils/RepositoryFactory';
+import IUserDTO from '../data/dtos/IUserDTO';
 
 export default class GetAllUsersService implements IService<IUserDTO[]> {
   public async execute(paginationParams: IPaginationParams): Promise<IUserDTO[]> {

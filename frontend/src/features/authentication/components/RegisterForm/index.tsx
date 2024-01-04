@@ -1,11 +1,11 @@
-import { ReactComponent as Logo } from 'assets/logo.svg';
+import { ReactComponent as Logo } from '@assets/logo.svg';
 import styles from './RegisterForm.module.scss';
-import stylesTheme from 'styles/Theme.module.scss';
-import InputText from 'presentation/components/InputText';
-import Button from 'presentation/components/Button';
+import stylesTheme from '@styles/Theme.module.scss';
 import { FormProvider } from 'react-hook-form';
-import { inputEmailValidation } from 'utils/inputValidations';
-import useRegisterUser from 'presentation/views/auth/RegisterForm/hooks/useRegisterUser';
+import Button from '@components/Button';
+import InputText from '@components/InputText';
+import { inputEmailValidation } from '@utils/inputValidations';
+import useRegisterUser from './hooks/useRegisterUser';
 
 const RegisterForm = () => {
   const { methods, handleSubmit, apiError } = useRegisterUser();

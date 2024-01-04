@@ -1,6 +1,6 @@
+import api from '@api/api';
 import { useMutation } from 'react-query';
-import api from 'api/api';
-import { handleError } from 'utils/errorHandler';
+import { handleError } from 'src/utils/errorHandler';
 
 type UserCredentials = {
   mail: string;

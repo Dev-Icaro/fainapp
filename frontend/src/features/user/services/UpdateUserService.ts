@@ -1,7 +1,7 @@
-import IService from 'interfaces/IService';
-import RepositoryFactory from 'utils/RepositoryFactory';
-import IUserRepository from 'data/repositories/interfaces/IUserRepository';
-import IUpdateUserDTO from 'domain/user/dtos/IUpdateUserDTO';
+import IService from '@interfaces/IService';
+import RepositoryFactory from 'src/utils/RepositoryFactory';
+import IUpdateUserDTO from '../data/dtos/IUpdateUserDTO';
+import IUserRepository from '../data/repositories/interfaces/IUserRepository';
 
 export default class UpdateUserService implements IService<void> {
   constructor(private readonly userRepo: IUserRepository) {}

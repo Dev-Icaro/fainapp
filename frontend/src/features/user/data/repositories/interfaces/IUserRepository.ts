@@ -1,7 +1,7 @@
-import IPaginationParams from 'interfaces/IPaginationParams';
-import ISignupDTO from 'domain/user/dtos/ISignupDTO';
-import IUpdateUserDTO from 'domain/user/dtos/IUpdateUserDTO';
-import IUserDTO from 'domain/user/dtos/IUserDTO';
+import IPaginationParams from '@interfaces/IPaginationParams';
+import ISignupDTO from '../../dtos/ISignupDTO';
+import IUpdateUserDTO from '../../dtos/IUpdateUserDTO';
+import IUserDTO from '../../dtos/IUserDTO';
 
 export default interface IUserRepository {
   getUserById(userId: number): Promise<IUserDTO>;

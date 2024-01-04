@@ -1,7 +1,7 @@
-import ICreateUserDTO from 'domain/user/dtos/ICreateUserDTO';
+import api from '@api/api';
+import ICreateUserDTO from '@features/user/data/dtos/ICreateUserDTO';
 import { useMutation } from 'react-query';
-import api from 'api/api';
-import { handleError } from 'utils/errorHandler';
+import { handleError } from 'src/utils/errorHandler';
 
 const registerUser = async (createUserDTO: ICreateUserDTO): Promise<void> => {
   return api

@@ -1,7 +1,6 @@
-import ApiException from 'exceptions/ApiException';
+import SignupService from '@features/user/services/SignupService';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import SignupService from 'features/user/services/SignupService';
 
 const useRegisterUser = () => {
   const methods = useForm();
@@ -17,24 +16,18 @@ const useRegisterUser = () => {
       return;
     }
 
-    try {
-      await new SignupService().execute({
-        mail: data.mail,
-        name: data.name,
-        password: data.password,
-      });
+    await new SignupService().execute({
+      mail: data.mail,
+      name: data.name,
+      password: data.password,
+    });
 
-      // await UserService.signup({
-      //   mail: data.mail,
-      //   name: data.name,
-      //   password: data.password,
-      // });
-      setApiError('');
-    } catch (err) {
-      if (err instanceof ApiException) {
-        setApiError(err.message);
-      }
-    }
+    // await UserService.signup({
+    //   mail: data.mail,
+    //   name: data.name,
+    //   password: data.password,
+    // });
+    setApiError('');
   });
 
   return {

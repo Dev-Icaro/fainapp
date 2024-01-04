@@ -1,9 +1,9 @@
+import api from '@api/api';
+import { LoginResult, UserCredentials } from '@features/authentication/services/AuthService';
+import useUserStore from '@features/authentication/useUserStore';
 import { useForm } from 'react-hook-form';
-import useUserStore from 'features/authentication/useUserStore';
-import { LoginResult, UserCredentials } from 'features/authentication/services/AuthService';
 import { useMutation } from 'react-query';
-import api from 'api/api';
-import { handleError } from 'utils/errorHandler';
+import { handleError } from 'src/utils/errorHandler';
 
 const useLoginForm = () => {
   const methods = useForm();

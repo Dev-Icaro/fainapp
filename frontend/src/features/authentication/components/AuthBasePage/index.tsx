@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import styles from './AuthBasePage.module.scss';
-import { ReactComponent as AuthBasePageArt } from 'assets/auth-base-page-art.svg';
+import { ReactComponent as AuthBasePageArt } from '@assets/auth-base-page-art.svg';
 
 const AuthBasePage = () => {
   return (

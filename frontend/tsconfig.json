@@ -14,12 +14,45 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src",
+    // "rootDir": "src",
+    "baseUrl": ".",
     "moduleResolution": "node",
+    "paths": {
+      "@features/*": [
+        "src/features/*"
+      ],
+      "@api/*": [
+        "src/api/*"
+      ],
+      "@injections/*": [
+        "src/injections/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@data/*": [
+        "src/data/*"
+      ],
+      "@interfaces/*": [
+        "src/interfaces/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@/*": [
+        "src/*"
+      ]
+    },
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "types": ["reflect-metadata"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["src"]
+  "include": ["src", "craco.config.js"],
 }

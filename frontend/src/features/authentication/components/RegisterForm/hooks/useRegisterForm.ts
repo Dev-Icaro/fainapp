@@ -1,5 +1,5 @@
+import useRegisterUser from '@features/authentication/hooks/useRegisterUser';
 import { useForm } from 'react-hook-form';
-import useRegisterUser from 'features/authentication/hooks/useRegisterUser';
 
 const useRegisterForm = () => {
   const methods = useForm();

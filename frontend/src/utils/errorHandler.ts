@@ -1,12 +1,11 @@
 import axios from 'axios';
-import ApiException from 'exceptions/ApiException';
 
 export const handleError = (error: unknown) => {
   if (axios.isAxiosError(error)) {
     if (error.response) {
-      const { data, status } = error.response;
+      const { data } = error.response;
       if (data && data.message) {
-        throw new ApiException(data.message, status);
+        throw new Error(data.message);
       }
     } else if (error.request) {
       throw new Error('Erro: O Servidor não respondeu a solicitação');

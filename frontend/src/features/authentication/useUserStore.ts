@@ -1,4 +1,4 @@
-import IUserDTO from 'domain/user/dtos/IUserDTO';
+import IUserDTO from '@features/user/data/dtos/IUserDTO';
 import { create } from 'zustand';
 
 interface UserStore {

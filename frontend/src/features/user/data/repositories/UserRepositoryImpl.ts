@@ -1,9 +1,9 @@
-import IPaginationParams from 'interfaces/IPaginationParams';
-import ISignupDTO from 'domain/user/dtos/ISignupDTO';
-import IUpdateUserDTO from 'domain/user/dtos/IUpdateUserDTO';
-import IUserDTO from 'domain/user/dtos/IUserDTO';
+import api from '@api/api';
+import IPaginationParams from '@interfaces/IPaginationParams';
+import ISignupDTO from '../dtos/ISignupDTO';
+import IUpdateUserDTO from '../dtos/IUpdateUserDTO';
+import IUserDTO from '../dtos/IUserDTO';
 import IUserRepository from './interfaces/IUserRepository';
-import api from 'api/api';
 
 export default class UserRepositoryImpl implements IUserRepository {
   getUserById(userId: number): Promise<IUserDTO> {

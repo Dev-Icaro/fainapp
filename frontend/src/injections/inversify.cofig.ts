@@ -1,7 +1,7 @@
-import IUserRepository from 'data/repositories/interfaces/IUserRepository';
 import { Container } from 'inversify';
 import TYPES from './types';
-import UserRepositoryImpl from 'data/repositories/UserRepositoryImpl';
+import UserRepositoryImpl from '@features/user/data/repositories/UserRepositoryImpl';
+import IUserRepository from '@features/user/data/repositories/interfaces/IUserRepository';
 
 const container = new Container();
 

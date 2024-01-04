@@ -1,12 +1,12 @@
-import Button from 'presentation/components/Button';
-import InputText from 'presentation/components/InputText';
 import { Link } from 'react-router-dom';
 import styles from './LoginPage.module.scss';
-import { ReactComponent as Logo } from 'assets/logo.svg';
 import { FormProvider } from 'react-hook-form';
-import stylesTheme from 'styles/Theme.module.scss';
-import useLoginForm from 'presentation/views/auth/LoginForm/hooks/useLoginForm';
-import { inputEmailValidation } from 'utils/inputValidations';
+import stylesTheme from '@styles/Theme.module.scss';
+import { inputEmailValidation } from 'src/utils/inputValidations';
+import useLoginForm from './hooks/useLoginForm';
+import { ReactComponent as Logo } from '@assets/logo.svg';
+import InputText from '@components/InputText';
+import Button from '@components/Button';
 
 const LoginForm = () => {
   const { handleSubmit, methods, mutation } = useLoginForm();
