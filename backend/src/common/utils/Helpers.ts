@@ -29,4 +29,8 @@ export default class Helpers {
   public static generateRandomNumber(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
+
+  public static minutesToSeconds(minutes: number): number {
+    return minutes * 60;
+  }
 }

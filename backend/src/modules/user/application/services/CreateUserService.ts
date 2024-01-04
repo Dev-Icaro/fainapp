@@ -7,8 +7,10 @@ import { BCRYPT_SALT_ROUNDS } from '@common/utils/systemConstants';
 import ICreateUserDTO from '@modules/user/domain/dtos/ICreateUserDTO';
 import { UserErrorMessages } from '@modules/user/domain/error-messages/UserErrorMessages';
 import bcrypt from 'bcrypt';
-import SendVerificationEmailService from './SendVerificationEmailService';
 import RedisCache from '@common/cache/RedisCache';
+import IUserVerificationInfo from '@modules/user/domain/dtos/IUserVerificationInfo';
+import EmailSenderFactory from '@common/utils/EmailSenderFactory';
+import IEmail from '@common/interfaces/IEmail';
 
 export default class CreateUserService implements IService<void> {
   constructor(private readonly appContext: AppContext) {}
@@ -30,15 +32,38 @@ export default class CreateUserService implements IService<void> {
     createUserDTO.password = await bcrypt.hash(createUserDTO.password, BCRYPT_SALT_ROUNDS);
     await userRepo.createUser(this.appContext.getClient(), createUserDTO);
 
-    try {
-      const verificationCode = Helpers.generateRandomNumber(1000, 9999);
-      await new SendVerificationEmailService().execute({
-        mail: createUserDTO.mail,
-        verificationCode: verificationCode,
-      });
-      await RedisCache.getClient().set(createUserDTO.mail, verificationCode, 'EX', 10 * 60);
-    } catch (error) {
-      throw new AppException('Falha no envio de email');
-    }
+    const verificationCode = Helpers.generateRandomNumber(1000, 9999);
+    this.sendVerificationEmail({
+      mail: createUserDTO.mail,
+      verificationCode,
+    });
+  }
+
+  private async sendVerificationEmail(userVerificationInfo: IUserVerificationInfo): Promise<void> {
+    const email = this.generateVerificationEmail(userVerificationInfo);
+    const emailSender = EmailSenderFactory.getEmailSender();
+    await emailSender.sendEmail(email);
+    await RedisCache.getClient().set(
+      userVerificationInfo.mail,
+      userVerificationInfo.verificationCode,
+      'EX',
+      10 * 60,
+    );
+  }
+
+  private generateVerificationEmail(userVerificationInfo: IUserVerificationInfo): IEmail {
+    const emailHtml = `
+      <div>
+        Seja bem-vindo ${userVerificationInfo.mail} <br />
+        Aqui está seu código de verificação ${userVerificationInfo.verificationCode}
+      </div>
+    `;
+
+    return {
+      from: process.env.SMTP_USER,
+      subject: 'Email de verificação - FAINAPP.',
+      to: [userVerificationInfo.mail],
+      html: emailHtml,
+    };
   }
 }

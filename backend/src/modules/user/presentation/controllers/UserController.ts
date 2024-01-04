@@ -31,13 +31,13 @@ export default class UserController {
     return response.json(userPaginationDTO);
   }
 
-  public async create(request: Request, response: Response): Promise<Response> {
+  public async signup(request: Request, response: Response): Promise<Response> {
     let { name, password, mail } = request.body;
     name = InputValidator.checkTypeAndAsign(name, { name: 'Nome do usuário' });
     password = InputValidator.checkTypeAndAsign(password, { name: 'Senha do usuário' });
     mail = InputValidator.checkTypeAndAsign(mail, { name: 'Email do usuário' });
 
-    await this.userUseCases.createUser({
+    await this.userUseCases.signup({
       name,
       password,
       mail,
