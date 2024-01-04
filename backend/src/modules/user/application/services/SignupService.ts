@@ -1,6 +1,6 @@
 import IService from '@common/interfaces/IService';
 import ISignupDTO from '@modules/user/domain/dtos/ISignupDTO';
-// import CreateUserService from './CreateUserService';
+import CreateUserService from './CreateUserService';
 import AppContext from '@common/utils/AppContext';
 import Helpers from '@common/utils/Helpers';
 import IUserVerificationInfo from '@modules/user/domain/dtos/IUserVerificationInfo';
@@ -11,8 +11,8 @@ export default class SignupService implements IService<void> {
   constructor(private readonly appContext: AppContext) {}
 
   public async execute(signupDTO: ISignupDTO): Promise<void> {
-    // const createUserService = new CreateUserService(this.appContext);
-    // await createUserService.execute(signupDTO);
+    const createUserService = new CreateUserService(this.appContext);
+    await createUserService.execute(signupDTO);
 
     const verificationCode = Helpers.generateRandomNumber(1000, 9999);
     const email = this.generateVerificationEmail({

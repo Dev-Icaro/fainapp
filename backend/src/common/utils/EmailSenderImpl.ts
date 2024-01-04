@@ -2,11 +2,11 @@ import transporter from '@config/email';
 import IEmailSender from '@common/interfaces/IEmailSender';
 import IEmail from '@common/interfaces/IEmail';
 import { injectable } from 'inversify';
-import IEmailSendingResult from '@common/interfaces/IEmailSendingResult';
+
 @injectable()
-class NodemailerEmailSender implements IEmailSender {
-  async sendEmail(email: IEmail): Promise<IEmailSendingResult> {
-    return transporter
+export default class EmailSenderImpl implements IEmailSender {
+  async sendEmail(email: IEmail): Promise<void> {
+    await transporter
       .sendMail({
         from: email.from,
         subject: email.subject,
@@ -15,19 +15,10 @@ class NodemailerEmailSender implements IEmailSender {
         to: email.to.join(','),
         attachments: email.attachments,
       })
-      .then(() => {
-        return {
-          success: true,
-          error: null,
-        };
-      })
       .catch(error => {
-        return {
-          success: false,
-          error: error,
-        };
+        if (error instanceof Error) {
+          throw new Error(`Fail while sending mail with message:\n${error.message}`);
+        }
       });
   }
 }
-
-export { NodemailerEmailSender };
