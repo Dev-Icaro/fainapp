@@ -4,7 +4,8 @@ import './index.css';
 import 'normalize.css';
 import AppRouter from './routes';
 import { QueryClientProvider } from 'react-query';
-import queryClient from 'services/queryClient';
+import queryClient from 'api/queryClient';
+import 'reflect-metadata';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
