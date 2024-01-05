@@ -1,4 +1,4 @@
-import { signup } from '@features/authentication/services/signup';
+import { signup } from '@features/authentication/services/SignupService';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 

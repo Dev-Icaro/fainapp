@@ -1,4 +1,4 @@
-import { login } from '@features/authentication/services/login';
+import LoginService from '@features/authentication/services/LoginService';
 import useUserStore from '@features/authentication/useUserStore';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -11,8 +11,7 @@ const useLoginViewModel = () => {
 
   const handleLogin = methods.handleSubmit(async (formData: any) => {
     setIsLoading(true);
-
-    await login({
+    await LoginService.execute({
       mail: formData.mail,
       password: formData.password,
     })

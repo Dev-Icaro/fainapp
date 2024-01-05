@@ -12,7 +12,7 @@
   p {
     text-align: center;
   }
-  
+
   strong {
     margin: 20px 0;
   }
@@ -24,15 +24,14 @@
     text-align: right;
     width: 100%;
     max-width: 500px;
-  
+
     &:hover {
       color: $blue-dark;
     }
   }
 
   &__registerButton {
-    width: 100%;    
+    width: 100%;
     max-width: 500px;
   }
 }
-
