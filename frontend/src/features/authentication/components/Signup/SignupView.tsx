@@ -5,17 +5,19 @@ import { FormProvider } from 'react-hook-form';
 import Button from '@components/Button';
 import InputText from '@components/InputText';
 import { inputEmailValidation } from '@utils/inputValidations';
-import useRegisterUser from './hooks/useRegisterUser';
+import useSignupViewModel from './useSignupViewModel';
 
-const RegisterForm = () => {
-  const { methods, handleSubmit, apiError } = useRegisterUser();
+const SignupView = () => {
+  const { methods, handleSignup, error, isLoading } = useSignupViewModel();
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <FormProvider {...methods}>
-      <form className={styles.registerForm} onSubmit={handleSubmit}>
+      <form className={styles.registerForm} onSubmit={handleSignup}>
         <Logo width={64} height={64} />
         <strong>Bem-vindo! Cadastre sua conta para começarmos</strong>
-        {apiError && <div className={stylesTheme.error}>{apiError}</div>}
+        {error && <div className={stylesTheme.error}>{error}</div>}
         <InputText
           id="mail"
           label="Endereço de email"
@@ -56,4 +58,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default SignupView;

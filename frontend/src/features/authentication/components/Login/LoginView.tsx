@@ -3,24 +3,24 @@ import styles from './LoginPage.module.scss';
 import { FormProvider } from 'react-hook-form';
 import stylesTheme from '@styles/Theme.module.scss';
 import { inputEmailValidation } from 'src/utils/inputValidations';
-import useLoginForm from './hooks/useLoginForm';
+import useLoginViewModel from './useLoginViewModel';
 import { ReactComponent as Logo } from '@assets/logo.svg';
 import InputText from '@components/InputText';
 import Button from '@components/Button';
 
-const LoginForm = () => {
-  const { handleSubmit, methods, mutation } = useLoginForm();
+const LoginView = () => {
+  const { handleLogin, methods, error, isLoading } = useLoginViewModel();
 
-  if (mutation.isLoading) {
+  if (isLoading) {
     return <div>Carregando ...</div>;
   }
 
   return (
     <FormProvider {...methods}>
-      <form className={styles.loginForm} onSubmit={handleSubmit}>
+      <form className={styles.loginForm} onSubmit={handleLogin}>
         <Logo width={64} height={64} />
         <strong>Bem-vindo de volta! Logue-se na sua conta.</strong>
-        {mutation.error && <div className={stylesTheme.error}>{mutation.error.message}</div>}
+        {error && <div className={stylesTheme.error}>{error}</div>}
         <InputText
           id="mail"
           label="Endereço de email"
@@ -54,4 +54,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default LoginView;

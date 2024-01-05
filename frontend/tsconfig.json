@@ -45,6 +45,9 @@
       "@styles/*": [
         "src/styles/*"
       ],
+      "@services/*": [
+        "src/api/services/*"
+      ],
       "@/*": [
         "src/*"
       ]
