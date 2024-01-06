@@ -4,7 +4,9 @@ import ISignupDTO from '../dtos/ISignupDTO';
 import IUpdateUserDTO from '../dtos/IUpdateUserDTO';
 import IUserDTO from '../dtos/IUserDTO';
 import IUserRepository from './interfaces/IUserRepository';
+import { injectable } from 'inversify';
 
+@injectable()
 export default class UserRepositoryImpl implements IUserRepository {
   getUserById(userId: number): Promise<IUserDTO> {
     return api.get<IUserDTO>(`user/${userId}`).then(response => response.data);

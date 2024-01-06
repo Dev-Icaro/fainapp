@@ -3,7 +3,7 @@ import { IUserCredentials } from '../interfaces/IUserCredentials';
 import RepositoryFactory from '@utils/RepositoryFactory';
 
 const LoginService = {
-  execute: (userCredentials: IUserCredentials): Promise<ILoginResult> => {
+  execute: async (userCredentials: IUserCredentials): Promise<ILoginResult> => {
     const authRepo = RepositoryFactory.getAuthRepository();
     return authRepo.login(userCredentials);
   },

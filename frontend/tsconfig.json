@@ -53,7 +53,7 @@
       ]
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
-    "types": ["reflect-metadata"],
+    "types": ["reflect-metadata", "node"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },

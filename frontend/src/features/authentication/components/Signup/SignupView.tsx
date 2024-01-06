@@ -6,17 +6,20 @@ import Button from '@components/Button';
 import InputText from '@components/InputText';
 import { inputEmailValidation } from '@utils/inputValidations';
 import useSignupViewModel from './useSignupViewModel';
+import Loading from '@components/Loading';
 
 const SignupView = () => {
   const { methods, handleSignup, error, isLoading } = useSignupViewModel();
 
-  if (isLoading) return <div>Loading...</div>;
-
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <FormProvider {...methods}>
       <form className={styles.registerForm} onSubmit={handleSignup}>
-        <Logo width={64} height={64} />
-        <strong>Bem-vindo! Cadastre sua conta para começarmos</strong>
+        <header>
+          <Logo width={64} height={64} />
+          <strong>Bem-vindo! Cadastre sua conta para começarmos</strong>
+        </header>
         {error && <div className={stylesTheme.error}>{error}</div>}
         <InputText
           id="mail"

@@ -34,4 +34,9 @@
     width: 100%;
     max-width: 500px;
   }
+
+  header * {
+    display: block;
+    margin: 1rem auto;
+  }
 }

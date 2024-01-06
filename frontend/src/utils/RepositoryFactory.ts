@@ -1,4 +1,4 @@
-import container from '@injections/inversify.cofig';
+import container from '@injections/inversify.config';
 import TYPES from '@injections/types';
 import IUserRepository from '@features/user/data/repositories/interfaces/IUserRepository';
 import IAuthRepository from '@features/authentication/data/repositories/interfaces/IAuthRepository';

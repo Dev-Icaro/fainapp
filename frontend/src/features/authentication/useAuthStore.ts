@@ -8,7 +8,7 @@ interface UserStore {
   setAccessToken: (accessToken: string) => void;
 }
 
-const useUserStore = create<UserStore>(set => ({
+const useAuthStore = create<UserStore>(set => ({
   user: null,
   accessToken: '',
   setUser: (user: IUserDTO) => {
@@ -23,4 +23,4 @@ const useUserStore = create<UserStore>(set => ({
   },
 }));
 
-export default useUserStore;
+export default useAuthStore;

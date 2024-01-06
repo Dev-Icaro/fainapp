@@ -4,18 +4,20 @@ import ISignupDTO from '@features/user/data/dtos/ISignupDTO';
 import IAuthRepository from './interfaces/IAuthRepository';
 import api from '@api/api';
 import { handleError } from '@utils/errorHandler';
+import { injectable } from 'inversify';
 
+@injectable()
 export default class AuthRepositoryImpl implements IAuthRepository {
   async login(userCredentials: IUserCredentials): Promise<ILoginResult> {
     return api
       .post<ILoginResult>('auth/login', userCredentials)
       .then(response => response.data)
-      .catch(err => handleError(err));
+      .catch(error => handleError(error));
   }
 
   async signup(signupDTO: ISignupDTO): Promise<void> {
     return api
-      .post('user/signup', signupDTO)
+      .post('auth/signup', signupDTO)
       .then(response => response.data)
       .catch(error => handleError(error));
   }

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { LoginView, AuthBasePage, SignupView } from '@features/authentication';
+import { AuthBasePage, LoginView, SignupView } from '@features/authentication';
 
 const AppRouter = () => {
   return (

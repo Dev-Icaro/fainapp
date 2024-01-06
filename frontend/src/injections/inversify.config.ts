@@ -1,5 +1,6 @@
 import { Container } from 'inversify';
 import TYPES from './types';
+import 'reflect-metadata';
 import UserRepositoryImpl from '@features/user/data/repositories/UserRepositoryImpl';
 import IUserRepository from '@features/user/data/repositories/interfaces/IUserRepository';
 import IAuthRepository from '@features/authentication/data/repositories/interfaces/IAuthRepository';

@@ -23,7 +23,10 @@ const useSignupViewModel = () => {
       name: data.name,
       password: data.password,
     })
-      .catch(error => setError(error?.message))
+      .then(() => setError(''))
+      .catch(error => {
+        setError(error?.message);
+      })
       .finally(() => setIsLoading(false));
   });
 
