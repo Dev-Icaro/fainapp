@@ -2,12 +2,19 @@ import SignupService from '@features/authentication/services/SignupService';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+interface FormData {
+  password: string;
+  passwordRepeat: string;
+  mail: string;
+  name: string;
+}
+
 const useSignupViewModel = () => {
-  const methods = useForm();
+  const methods = useForm<FormData>();
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSignup = methods.handleSubmit(async (data: any) => {
+  const handleSignup = methods.handleSubmit(async data => {
     const arePasswordsEqual = data.password === data.passwordRepeat;
     if (!arePasswordsEqual) {
       methods.setError('passwordRepeat', {

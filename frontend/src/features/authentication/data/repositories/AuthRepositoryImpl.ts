@@ -21,4 +21,11 @@ export default class AuthRepositoryImpl implements IAuthRepository {
       .then(response => response.data)
       .catch(error => handleError(error));
   }
+
+  async verify(verificationCode: number): Promise<void> {
+    return api
+      .post('auth/verify', verificationCode)
+      .then(response => response.data)
+      .catch(error => handleError(error));
+  }
 }
