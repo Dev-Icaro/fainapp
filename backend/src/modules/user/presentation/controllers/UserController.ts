@@ -31,21 +31,6 @@ export default class UserController {
     return response.json(userPaginationDTO);
   }
 
-  public async signup(request: Request, response: Response): Promise<Response> {
-    let { name, password, mail } = request.body;
-    name = InputValidator.checkTypeAndAsign(name, { name: 'Nome do usuário' });
-    password = InputValidator.checkTypeAndAsign(password, { name: 'Senha do usuário' });
-    mail = InputValidator.checkTypeAndAsign(mail, { name: 'Email do usuário' });
-
-    await this.userUseCases.signup({
-      name,
-      password,
-      mail,
-    });
-
-    return response.status(HttpStatus.NO_CONTENT).send();
-  }
-
   public async update(request: Request, response: Response): Promise<Response> {
     let { name, password, mail } = request.body;
     let id = Number(request.params.id);

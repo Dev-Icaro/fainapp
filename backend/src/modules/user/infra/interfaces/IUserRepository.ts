@@ -14,4 +14,5 @@ export default interface IUserRepository {
   countUsers(client: PoolClient): Promise<number>;
   existsByMail(client: PoolClient, mail: string): Promise<boolean>;
   existsById(client: PoolClient, userId: number): Promise<boolean>;
+  verifyUser(client: PoolClient, mail: string): Promise<void>;
 }

@@ -26,7 +26,7 @@ export default class LoginService implements IService<ITokenInfo> {
     const user = await userRepo.getUserByMail(this.appContext.getClient(), userCredentialsDTO.mail);
     if (!user) {
       throw new AppException(
-        Helpers.formatErrorMessage(UserErrorMessages.USER_NOT_FOUND_BY_ID, [
+        Helpers.formatErrorMessage(UserErrorMessages.USER_NOT_FOUND_BY_EMAIL, [
           userCredentialsDTO.mail,
         ]),
         HttpStatus.NOT_FOUND,

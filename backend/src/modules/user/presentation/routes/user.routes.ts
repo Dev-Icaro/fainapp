@@ -5,10 +5,7 @@ import { container } from '@common/injections/inversify.config';
 const userRouter = Router();
 const userController = container.resolve(UserController);
 
-userRouter
-  .route('/')
-  .get(userController.getAll.bind(userController))
-  .post(userController.signup.bind(userController));
+userRouter.route('/').get(userController.getAll.bind(userController));
 
 userRouter
   .route('/:id')

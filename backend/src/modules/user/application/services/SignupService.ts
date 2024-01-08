@@ -1,11 +1,12 @@
+import redisCache from '@common/cache/RedisCache';
 import IService from '@common/interfaces/IService';
-import ISignupDTO from '@modules/user/domain/dtos/ISignupDTO';
-import CreateUserService from './CreateUserService';
+import IEmail from '@common/interfaces/IEmail';
+import EmailSenderFactory from '@common/utils/EmailSenderFactory';
 import AppContext from '@common/utils/AppContext';
 import Helpers from '@common/utils/Helpers';
+import ISignupDTO from '@modules/user/domain/dtos/ISignupDTO';
 import IUserVerificationInfo from '@modules/user/domain/dtos/IUserVerificationInfo';
-import EmailSenderFactory from '@common/utils/EmailSenderFactory';
-import IEmail from '@common/interfaces/IEmail';
+import CreateUserService from './CreateUserService';
 
 export default class SignupService implements IService<void> {
   constructor(private readonly appContext: AppContext) {}
@@ -21,13 +22,17 @@ export default class SignupService implements IService<void> {
     });
     const emailSender = EmailSenderFactory.getEmailSender();
     await emailSender.sendEmail(email);
+
+    await redisCache
+      .getClient()
+      .set(signupDTO.mail, verificationCode, 'EX', Helpers.minutesToSeconds(10));
   }
 
   private generateVerificationEmail(userVerificationInfo: IUserVerificationInfo): IEmail {
     const emailHtml = `
       <div>
         Seja bem-vindo ${userVerificationInfo.mail} <br />
-        Aqui está seu código de verificação ${userVerificationInfo.verificationCode}
+        Aqui está seu código de verificação <strong>${userVerificationInfo.verificationCode}</strong>
       </div>
     `;
 

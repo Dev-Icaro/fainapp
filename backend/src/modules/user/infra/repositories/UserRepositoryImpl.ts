@@ -9,6 +9,17 @@ import { injectable } from 'inversify';
 
 @injectable()
 export default class UserRepositoryImpl implements IUserRepository {
+  async verifyUser(client: PoolClient, mail: string): Promise<void> {
+    await client.query(
+      `
+      UPDATE users 
+      SET verification_date = $1
+      WHERE mail = $2
+      `,
+      [new Date(), mail],
+    );
+  }
+
   async existsById(client: PoolClient, userId: number): Promise<boolean> {
     const result = await client.query(
       `

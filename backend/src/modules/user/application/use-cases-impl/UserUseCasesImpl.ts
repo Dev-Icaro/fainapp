@@ -9,16 +9,9 @@ import GetAllUsersService from '../services/GetAllUsersService';
 import UpdateUserService from '../services/UpdateUserService';
 import DeleteUserService from '../services/DeleteUserService';
 import { injectable } from 'inversify';
-import ISignupDTO from '@modules/user/domain/dtos/ISignupDTO';
-import ServiceExecutor from '@common/utils/ServiceExecutor';
-import SignupService from '../services/SignupService';
 
 @injectable()
 export default class UserUseCasesImpl implements IUserUseCases {
-  public async signup(signupDTO: ISignupDTO): Promise<void> {
-    return ServiceExecutor.execute<void>(SignupService, signupDTO);
-  }
-
   public async getUserById(userId: number): Promise<IUserDTO> {
     const appContext = new AppContext();
     try {
