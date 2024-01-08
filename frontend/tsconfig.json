@@ -18,44 +18,23 @@
     "baseUrl": ".",
     "moduleResolution": "node",
     "paths": {
-      "@features/*": [
-        "src/features/*"
-      ],
-      "@api/*": [
-        "src/api/*"
-      ],
-      "@injections/*": [
-        "src/injections/*"
-      ],
-      "@components/*": [
-        "src/components/*"
-      ],
-      "@data/*": [
-        "src/data/*"
-      ],
-      "@interfaces/*": [
-        "src/interfaces/*"
-      ],
-      "@utils/*": [
-        "src/utils/*"
-      ],
-      "@assets/*": [
-        "src/assets/*"
-      ],
-      "@styles/*": [
-        "src/styles/*"
-      ],
-      "@services/*": [
-        "src/api/services/*"
-      ],
-      "@/*": [
-        "src/*"
-      ]
+      "@features/*": ["src/features/*"],
+      "@api/*": ["src/api/*"],
+      "@injections/*": ["src/injections/*"],
+      "@components/*": ["src/components/*"],
+      "@data/*": ["src/data/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@utils/*": ["src/utils/*"],
+      "@assets/*": ["src/assets/*"],
+      "@styles/*": ["src/styles/*"],
+      "@services/*": ["src/api/services/*"],
+      "@pages/*": ["src/pages/*"],
+      "@/*": ["src/*"]
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "types": ["reflect-metadata", "node"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["src", "craco.config.js"],
+  "include": ["src", "craco.config.js"]
 }

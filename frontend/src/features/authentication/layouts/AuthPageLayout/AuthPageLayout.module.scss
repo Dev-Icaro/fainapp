@@ -32,7 +32,7 @@
     }
   }
 
-  &__authPanel {
+  &__panel {
     background-color: $background-color-light;
     height: 100%;
     padding: 2rem 2rem;
@@ -40,12 +40,18 @@
     @media all and (max-width: $mobile) {
       width: 100%;
     }
-  
-    @media all and (min-width: $mobile) and (orientation: landscape){
+
+    @media all and (min-width: $mobile) and (orientation: landscape) {
       width: 40%;
       align-self: flex-end;
       border-radius: 2rem 0 0 2rem;
       max-width: 450px;
+    }
+
+    &__header * {
+      text-align: center;
+      display: block;
+      margin: 1rem auto;
     }
   }
 }

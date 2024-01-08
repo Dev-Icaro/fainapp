@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
-import styles from './LoginPage.module.scss';
+import styles from './LoginView.module.scss';
 import { FormProvider } from 'react-hook-form';
 import stylesTheme from '@styles/Theme.module.scss';
 import { inputEmailValidation } from '@utils/inputValidations';
 import useLoginViewModel from './useLoginViewModel';
-import { ReactComponent as Logo } from '@assets/logo.svg';
 import InputText from '@components/InputText';
 import Button from '@components/Button';
 import Loading from '@components/Loading';
@@ -17,11 +16,7 @@ const LoginView = () => {
   ) : (
     <FormProvider {...methods}>
       <form className={styles.loginForm} onSubmit={handleSubmit}>
-        <header className={styles.loginForm__header}>
-          <Logo width={64} height={64} />
-          <strong>Bem-vindo de volta! Logue-se na sua conta.</strong>
-          {error && <div className={stylesTheme.error}>{error}</div>}
-        </header>
+        {error && <div className={stylesTheme.error}>{error}</div>}
         <InputText
           id="mail"
           label="Endereço de email"

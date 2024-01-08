@@ -1,4 +1,3 @@
-import { ReactComponent as Logo } from '@assets/logo.svg';
 import styles from './RegisterForm.module.scss';
 import stylesTheme from '@styles/Theme.module.scss';
 import { FormProvider } from 'react-hook-form';
@@ -16,10 +15,6 @@ const SignupView = () => {
   ) : (
     <FormProvider {...methods}>
       <form className={styles.registerForm} onSubmit={handleSignup}>
-        <header>
-          <Logo width={64} height={64} />
-          <strong>Bem-vindo! Cadastre sua conta para começarmos</strong>
-        </header>
         {error && <div className={stylesTheme.error}>{error}</div>}
         <InputText
           id="mail"
