@@ -29,6 +29,7 @@
       "@styles/*": ["src/styles/*"],
       "@services/*": ["src/api/services/*"],
       "@pages/*": ["src/pages/*"],
+      "@config/*": ["src/config/*"],
       "@/*": ["src/*"]
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
