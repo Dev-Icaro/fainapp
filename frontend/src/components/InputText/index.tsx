@@ -1,18 +1,14 @@
-import { HTMLInputTypeAttribute } from 'react';
+import { InputHTMLAttributes } from 'react';
 import styles from './InputText.module.scss';
 import classNames from 'classnames';
-import { FieldValues, RegisterOptions, useFormContext } from 'react-hook-form';
-import { findInputError } from '@utils/findInputError';
-import { isInputInvalid } from '@utils/isInputInvalid';
+// import { FieldValues, RegisterOptions } from 'react-hook-form';
+// import { findInputError } from '@utils/findInputError';
+// import { isInputInvalid } from '@utils/isInputInvalid';
 
-interface InputTextProps {
-  id: string;
+interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  type: HTMLInputTypeAttribute;
-  placeholder?: string;
-  className?: string;
-  validations?: RegisterOptions<FieldValues, string>;
-  maxLength?: number;
+  error?: string;
+  // validations?: RegisterOptions<FieldValues, string>;
 }
 
 interface InputErrorProps {
@@ -25,19 +21,22 @@ const InputText = ({
   label,
   placeholder,
   className,
-  validations,
+  // validations,
   maxLength,
+  error,
+  ...rest
 }: InputTextProps) => {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext();
+  // const {
+  //   register,
+  //   formState: { errors },
+  // } = useFormContext();
 
-  const inputError = findInputError(errors, id);
-  const isInvalid = isInputInvalid(inputError);
+  // const inputError = findInputError(errors, id);
+  // const isInvalid = isInputInvalid(inputError);
+  const isValid = !error;
 
   const classes = classNames(styles.inputText, className, {
-    [styles['inputText--error']]: isInvalid,
+    [styles['inputText--error']]: !isValid,
   });
 
   return (
@@ -47,10 +46,11 @@ const InputText = ({
         id={id}
         type={type}
         placeholder={placeholder}
-        {...register(id, validations)}
+        // {...register(id, validations)}
         maxLength={maxLength}
+        {...rest}
       />
-      {isInvalid && <InputError message={inputError.error.message} />}
+      {error && <InputError message={error} />}
     </div>
   );
 };

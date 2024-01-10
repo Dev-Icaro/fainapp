@@ -3,7 +3,7 @@ import stylesTheme from '@styles/Theme.module.scss';
 import { FormProvider } from 'react-hook-form';
 import Button from '@components/Button';
 import InputText from '@components/InputText';
-import { inputEmailValidation } from '@utils/inputValidations';
+// import { inputEmailValidation } from '@utils/inputValidations';
 import useSignupViewModel from './useSignupViewModel';
 import Loading from '@components/Loading';
 
@@ -22,7 +22,7 @@ const SignupView = () => {
           type="email"
           placeholder="Insira seu email"
           maxLength={50}
-          {...inputEmailValidation}
+          // {...inputEmailValidation}
         />
         <InputText
           id="name"
@@ -30,7 +30,7 @@ const SignupView = () => {
           type="text"
           placeholder="Insira seu nome"
           maxLength={50}
-          validations={{ required: { value: true, message: 'Nome é obrigatório' } }}
+          // validations={{ required: { value: true, message: 'Nome é obrigatório' } }}
         />
         <InputText
           id="password"
@@ -38,7 +38,7 @@ const SignupView = () => {
           type="password"
           placeholder="Insira sua senha"
           maxLength={50}
-          validations={{ required: { value: true, message: 'Senha é obrigatória' } }}
+          // validations={{ required: { value: true, message: 'Senha é obrigatória' } }}
         />
         <InputText
           id="passwordRepeat"
@@ -46,7 +46,7 @@ const SignupView = () => {
           type="password"
           placeholder="Repita sua senha"
           maxLength={50}
-          validations={{ required: { value: true, message: 'Repita senha é obrigatório' } }}
+          // validations={{ required: { value: true, message: 'Repita senha é obrigatório' } }}
         />
         <Button className={styles.registerForm__registerButton} variant="filled" type="submit">
           Registrar-se
