@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
+
+type FormData = Yup.InferType<typeof formSchema>;
 
 const formSchema = Yup.object().shape({
   mail: Yup.string().email().required(),
@@ -11,41 +14,34 @@ const formSchema = Yup.object().shape({
 });
 
 const useLoginViewModel = () => {
-  const methods = useForm({
-    resetOptions: {
-      keepErrors: false,
-    },
+  const { register, formState, handleSubmit } = useForm<FormData>({
     resolver: yupResolver(formSchema),
   });
-  // const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const [apiError, setApiError] = useState('');
   const { setAccessToken } = useAuthStore();
 
-  const handleSubmit = methods.handleSubmit(async formData => {
-    // setIsLoading(true);
-
+  const handleLogin = handleSubmit(async formData => {
     await LoginService.execute({
       mail: formData.mail,
       password: formData.password,
     })
       .then(data => {
         setAccessToken(data.accessToken);
-        setError('');
+        setApiError('');
       })
       .catch(error => {
-        setError(error?.message);
+        setApiError(error?.message);
       });
-    // .finally(() => {
-    //   setIsLoading(false);
-    // });
   });
 
   return {
-    handleSubmit,
-    isLoading: methods.formState.isSubmitting,
-    methods,
-    error,
-    formState: methods.formState,
+    handleLogin,
+    navigate,
+    register,
+    apiError,
+    isLoading: formState.isSubmitting,
+    formErrors: formState.errors,
   };
 };
 

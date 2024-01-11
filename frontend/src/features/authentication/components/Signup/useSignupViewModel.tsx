@@ -1,47 +1,47 @@
 import SignupService from '@features/authentication/services/SignupService';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 
-interface FormData {
-  password: string;
-  passwordRepeat: string;
-  mail: string;
-  name: string;
-}
+type FormData = Yup.InferType<typeof formSchema>;
+
+const formSchema = Yup.object().shape({
+  password: Yup.string().min(6).required(),
+  passwordRepeat: Yup.string()
+    .oneOf([Yup.ref('password'), undefined], 'Passwords must match')
+    .required(),
+  mail: Yup.string().email().required(),
+  name: Yup.string().required(),
+});
 
 const useSignupViewModel = () => {
-  const methods = useForm<FormData>();
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const { formState, handleSubmit, register } = useForm<FormData>({
+    resolver: yupResolver(formSchema),
+  });
+  const [apiError, setApiError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSignup = methods.handleSubmit(async data => {
-    const arePasswordsEqual = data.password === data.passwordRepeat;
-    if (!arePasswordsEqual) {
-      methods.setError('passwordRepeat', {
-        type: 'manual',
-        message: 'As senhas devem ser iguais',
-      });
-      return;
-    }
-
-    setIsLoading(true);
+  const handleSignup = handleSubmit(async data => {
     await SignupService.execute({
       mail: data.mail,
       name: data.name,
       password: data.password,
     })
-      .then(() => setError(''))
+      .then(() => setApiError(''))
       .catch(error => {
-        setError(error?.message);
-      })
-      .finally(() => setIsLoading(false));
+        setApiError(error?.message);
+      });
   });
 
   return {
     handleSignup,
-    methods,
-    error,
-    isLoading,
+    register,
+    navigate,
+    apiError,
+    formErrors: formState.errors,
+    isLoading: formState.isSubmitting,
   };
 };
 

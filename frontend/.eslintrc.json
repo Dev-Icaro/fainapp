@@ -29,6 +29,7 @@
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "[iI]gnored" }],
     "no-unused-vars": ["error", { "argsIgnorePattern": "[iI]gnored" }],
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "react/display-name": "off"
   }
 }
