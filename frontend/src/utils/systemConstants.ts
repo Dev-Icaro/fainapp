@@ -7,3 +7,9 @@ export enum HttpStatus {
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,
 }
+
+export enum InputErrorMessages {
+  REQUIRED = 'Obrigatório',
+  INVALID_EMAIL = 'Formato do email inválido',
+  MIN_LENGTH = 'O Campo deve conter no mínimo {0} caracteres',
+}

@@ -41,9 +41,9 @@ const LoginView = () => {
       <Button type="submit" variant="filled">
         Logar
       </Button>
-      <p>OU</p>
+      {/* <p>OU</p> */}
       <Button type="submit" variant="outlined" onClick={() => navigate('/auth/register')}>
-        Registar-se
+        Registrar-se
       </Button>
     </form>
   );

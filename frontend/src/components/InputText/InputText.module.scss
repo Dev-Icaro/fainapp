@@ -12,17 +12,18 @@
 
   input {
     width: 100%;
-    padding: 1rem;
+    padding: 0.8rem;
     border-radius: 0.5rem;
     border: 1px solid #c5c5c5;
     background-color: #f5f5f5;
+    font-size: 16px;
   }
 
   &--error {
     label {
       color: $error;
     }
-  
+
     input {
       border: 1px solid $error;
     }

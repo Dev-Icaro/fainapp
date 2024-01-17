@@ -14,54 +14,57 @@ const SignupView = () => {
   ) : (
     <form className={styles.registerForm} onSubmit={handleSignup}>
       {apiError && <div className={stylesTheme.error}>{apiError}</div>}
-      <InputText
-        id="mail"
-        label="Endereço de email"
-        type="email"
-        placeholder="Insira seu email"
-        maxLength={50}
-        error={formErrors.mail?.message}
-        {...register('mail')}
-      />
-      <InputText
-        id="name"
-        label="Nome completo"
-        type="text"
-        placeholder="Insira seu nome"
-        maxLength={50}
-        error={formErrors.name?.message}
-        {...register('name')}
-      />
-      <InputText
-        id="password"
-        label="Senha"
-        type="password"
-        placeholder="Insira sua senha"
-        maxLength={50}
-        error={formErrors.password?.message}
-        {...register('password')}
-      />
-      <InputText
-        id="passwordRepeat"
-        label="Repita sua senha"
-        type="password"
-        placeholder="Repita sua senha"
-        maxLength={50}
-        error={formErrors.passwordRepeat?.message}
-        {...register('passwordRepeat')}
-      />
-      <Button className={styles.registerForm__registerButton} variant="filled" type="submit">
-        Registrar-se
-      </Button>
-      <p>OU</p>
-      <Button
-        className={styles.registerForm__registerButton}
-        variant="outlined"
-        type="button"
-        onClick={() => navigate('/auth/login')}
-      >
-        Logar-se
-      </Button>
+      <div className={styles.registerForm__inputWrapper}>
+        <InputText
+          id="mail"
+          label="Endereço de email"
+          type="email"
+          placeholder="Insira seu email"
+          maxLength={50}
+          error={formErrors.mail?.message}
+          {...register('mail')}
+        />
+        <InputText
+          id="name"
+          label="Nome completo"
+          type="text"
+          placeholder="Insira seu nome"
+          maxLength={50}
+          error={formErrors.name?.message}
+          {...register('name')}
+        />
+        <InputText
+          id="password"
+          label="Senha"
+          type="password"
+          placeholder="Insira sua senha"
+          maxLength={50}
+          error={formErrors.password?.message}
+          {...register('password')}
+        />
+        <InputText
+          id="passwordRepeat"
+          label="Repita sua senha"
+          type="password"
+          placeholder="Repita sua senha"
+          maxLength={50}
+          error={formErrors.passwordRepeat?.message}
+          {...register('passwordRepeat')}
+        />
+      </div>
+      <div className={styles.registerForm__buttonWrapper}>
+        <Button className={styles.registerForm__registerButton} variant="filled" type="submit">
+          Registrar-se
+        </Button>
+        <Button
+          className={styles.registerForm__registerButton}
+          variant="outlined"
+          type="button"
+          onClick={() => navigate('/auth/login')}
+        >
+          Logar-se
+        </Button>
+      </div>
     </form>
   );
 };

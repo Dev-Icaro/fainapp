@@ -2,31 +2,23 @@
 @import '@styles/breakpoints';
 
 .loginForm {
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px;
 
-  p {
-    text-align: center;
-  }
-
-  strong {
-    margin: 20px 0;
-  }
-
   &__forgotPassword {
-    position: relative;
-    top: -10px;
+    margin-top: -10px;
     color: $blue-light;
     text-align: right;
     width: 100%;
     max-width: 500px;
+    text-decoration: none;
 
     &:hover {
       color: $blue-dark;
+      text-decoration: underline;
     }
   }
 }

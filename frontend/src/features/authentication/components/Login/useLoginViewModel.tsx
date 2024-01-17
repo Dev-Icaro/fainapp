@@ -5,12 +5,13 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
+import { InputErrorMessages } from '@utils/systemConstants';
 
 type FormData = Yup.InferType<typeof formSchema>;
 
 const formSchema = Yup.object().shape({
-  mail: Yup.string().email().required(),
-  password: Yup.string().required(),
+  mail: Yup.string().email(InputErrorMessages.INVALID_EMAIL).required(InputErrorMessages.REQUIRED),
+  password: Yup.string().required(InputErrorMessages.REQUIRED),
 });
 
 const useLoginViewModel = () => {

@@ -1,60 +1,62 @@
 @import '@styles/variables';
 @import '@styles/breakpoints';
 
-.authContainer {
+.container {
   display: flex;
-  width: 100%;
-  height: 100%;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
 
-  &__art {
-    @media all and (max-width: $mobile) {
+.panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: $background-color-light;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 100vh;
+
+  &__title {
+    font-size: 1.3rem;
+    padding: 1.2rem 0;
+    font-weight: 600;
+  }
+
+  @media all and (min-width: $desktop_xsm) {
+    flex-direction: initial;
+    width: initial;
+    height: initial;
+  }
+
+  &__side {
+    padding: 2.5rem;
+
+    &:nth-child(even) {
       display: none;
     }
 
-    @media all and (min-width: $mobile) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-grow: 1;
+    header {
+      max-width: 500px;
+      margin: 0 auto;
     }
 
-    svg {
-      @media all and (max-width: $mobile) {
-        display: none;
-      }
-
-      @media all and (min-width: $mobile) {
-        width: 100%;
-        height: auto;
-        max-width: 450px;
-        max-height: 450px;
-      }
-    }
-  }
-
-  &__panel {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: $background-color-light;
-    height: 100%;
-    padding: 1rem 2rem;
-
-    @media all and (max-width: $mobile) {
+    header * {
+      display: block;
       width: 100%;
     }
 
-    @media all and (min-width: $mobile) and (orientation: landscape) {
-      width: 40%;
-      align-self: flex-end;
-      border-radius: 2rem 0 0 2rem;
-      max-width: 450px;
-    }
+    @media all and (min-width: $desktop_xsm) {
+      width: 50%;
+      min-width: 400px;
 
-    &__header * {
-      text-align: center;
-      display: block;
-      margin: 1rem auto;
+      &:nth-child(even) {
+        display: flex;
+        align-items: center;
+        background-color: $blue-light;
+        border-radius: 0 1rem 1rem 0;
+      }
     }
   }
 }

@@ -2,19 +2,14 @@
 @import '@styles/variables';
 
 .registerForm {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-
-  strong {
-    margin: 10px 0;
+  &__inputWrapper,
+  &__buttonWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
-  header * {
-    display: block;
-    margin: 1rem auto;
+  &__inputWrapper {
+    margin-bottom: 2rem;
   }
 }

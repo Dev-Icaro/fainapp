@@ -1,28 +1,27 @@
 import VerifyService from '@features/authentication/services/VerifyService';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-
-interface FormData {
-  verificationCode: number;
-}
+import { FormEvent, useState } from 'react';
 
 const useVerifyViewModel = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const methods = useForm<FormData>();
+  const [apiError, setApiError] = useState('');
+  const [verificationCode, setVerificationCode] = useState(0);
 
-  const handleSubmit = methods.handleSubmit(async data => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setIsLoading(true);
-    await VerifyService.execute(data.verificationCode)
-      .then(() => setError(''))
-      .catch(error => setError(error?.message))
+    await VerifyService.execute(verificationCode)
+      .then(() => setApiError(''))
+      .catch(error => setApiError(error?.message))
       .finally(() => setIsLoading(false));
-  });
+  };
+
+  const handleInputChange = (event: ) {
+    
+  }
 
   return {
-    methods,
     isLoading,
-    error,
+    apiError,
     handleSubmit,
   };
 };

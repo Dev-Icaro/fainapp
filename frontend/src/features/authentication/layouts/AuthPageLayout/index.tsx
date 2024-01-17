@@ -1,25 +1,27 @@
 import styles from './AuthPageLayout.module.scss';
-import { ReactComponent as AuthBasePageArt } from '@assets/auth-base-page-art.svg';
+import { ReactComponent as AuthPageArt } from '@assets/auth-page-art.svg';
 import { ReactComponent as Logo } from '@assets/logo.svg';
 import { ReactNode } from 'react';
 
 interface AuthPageLayoutProps {
   children: ReactNode;
-  message: string;
+  title: string;
 }
 
-const AuthPageLayout = ({ children, message }: AuthPageLayoutProps) => {
+const AuthPageLayout = ({ children, title }: AuthPageLayoutProps) => {
   return (
-    <div className={styles.authContainer}>
-      <div className={styles.authContainer__art}>
-        <AuthBasePageArt />
-      </div>
-      <div className={styles.authContainer__panel}>
-        <header className={styles.authContainer__panel__header}>
-          <Logo width={64} height={64} />
-          <strong>{message}</strong>
-        </header>
-        <div>{children}</div>
+    <div className={styles.container}>
+      <div className={styles.panel}>
+        <span className={styles.panel__side}>
+          <header>
+            <Logo width={64} height={64} />
+            <p className={styles.panel__title}>{title}</p>
+          </header>
+          <div>{children}</div>
+        </span>
+        <span className={styles.panel__side}>
+          <AuthPageArt width={350} height={350} />
+        </span>
       </div>
     </div>
   );
