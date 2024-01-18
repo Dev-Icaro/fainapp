@@ -1,0 +1,26 @@
+@import '@styles/variables';
+
+.verificationCodeInput {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.character {
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  text-align: center;
+  border: none;
+  color: #999999;
+  border-bottom: 1px solid #cccccc;
+  outline: 0;
+
+  &:focus,
+  &:active {
+    border-bottom: 1px solid $blue-light;
+    color: $blue-light;
+  }
+}

@@ -1,6 +1,6 @@
 import Loading from '@components/Loading';
+import VerificationCodeInput from '../VerificationCodeInput';
 import useVerifyViewModel from './useVerifyViewModel';
-import InputText from '@components/InputText';
 
 const VerifyView = () => {
   const { apiError, handleSubmit, isLoading } = useVerifyViewModel();
@@ -10,13 +10,7 @@ const VerifyView = () => {
   ) : (
     <form action="" onSubmit={handleSubmit}>
       {apiError && <div>{apiError}</div>}
-      <InputText
-        id="verificationCode"
-        label="Codigo de verificação"
-        placeholder="Digite o código de verificação"
-        maxLength={4}
-        type="text"
-      />
+      <VerificationCodeInput />
     </form>
   );
 };

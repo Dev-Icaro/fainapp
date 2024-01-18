@@ -1,5 +1,5 @@
 import VerifyService from '@features/authentication/services/VerifyService';
-import { FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
 const useVerifyViewModel = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,14 +15,15 @@ const useVerifyViewModel = () => {
       .finally(() => setIsLoading(false));
   };
 
-  const handleInputChange = (event: ) {
-    
-  }
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setVerificationCode(parseInt(event.target.value));
+  };
 
   return {
     isLoading,
     apiError,
     handleSubmit,
+    handleInputChange,
   };
 };
 
