@@ -1,19 +1,16 @@
-import styles from './RegisterForm.module.scss';
-import stylesTheme from '@styles/Theme.module.scss';
+import styles from './SignupView.module.scss';
 import Button from '@components/Button';
 import InputText from '@components/InputText';
 import useSignupViewModel from './useSignupViewModel';
 import Loading from '@components/Loading';
 
 const SignupView = () => {
-  const { handleSignup, apiError, formErrors, isLoading, register, navigate } =
-    useSignupViewModel();
+  const { handleSignup, formErrors, isLoading, register, navigate } = useSignupViewModel();
 
   return isLoading ? (
     <Loading />
   ) : (
     <form className={styles.registerForm} onSubmit={handleSignup}>
-      {apiError && <div className={stylesTheme.error}>{apiError}</div>}
       <div className={styles.registerForm__inputWrapper}>
         <InputText
           id="mail"

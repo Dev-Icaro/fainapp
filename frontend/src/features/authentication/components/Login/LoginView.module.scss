@@ -7,18 +7,4 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
-
-  &__forgotPassword {
-    margin-top: -10px;
-    color: $blue-light;
-    text-align: right;
-    width: 100%;
-    max-width: 500px;
-    text-decoration: none;
-
-    &:hover {
-      color: $blue-dark;
-      text-decoration: underline;
-    }
-  }
 }

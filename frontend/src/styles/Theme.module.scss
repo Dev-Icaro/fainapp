@@ -23,6 +23,21 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
+.link {
+  margin-top: -10px;
+  color: $blue-light;
+  text-align: right;
+  width: 100%;
+  max-width: 500px;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    color: $blue-dark;
+    text-decoration: underline;
+  }
+}
+
 .error {
   font-style: italic;
   color: $error;

@@ -7,14 +7,12 @@ import Button from '@components/Button';
 import Loading from '@components/Loading';
 
 const LoginView = () => {
-  const { handleLogin, register, formErrors, apiError, isLoading, navigate } = useLoginViewModel();
+  const { handleLogin, register, formErrors, isLoading, navigate } = useLoginViewModel();
 
   return isLoading ? (
     <Loading />
   ) : (
     <form className={styles.loginForm} onSubmit={handleLogin}>
-      {apiError && <div className={stylesTheme.error}>{apiError}</div>}
-
       <InputText
         id="mail"
         label="Endereço de email"
@@ -35,13 +33,12 @@ const LoginView = () => {
         {...register('password')}
       />
 
-      <Link className={styles.loginForm__forgotPassword} to={'/forgot-password'}>
+      <Link className={stylesTheme.link} to={'/forgot-password'}>
         Esqueceu sua senha?
       </Link>
       <Button type="submit" variant="filled">
         Logar
       </Button>
-      {/* <p>OU</p> */}
       <Button type="submit" variant="outlined" onClick={() => navigate('/auth/register')}>
         Registrar-se
       </Button>

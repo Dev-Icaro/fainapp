@@ -1,11 +1,11 @@
 import LoginService from '@features/authentication/services/LoginService';
 import useAuthStore from '@features/authentication/useAuthStore';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { InputErrorMessages } from '@utils/systemConstants';
+import Notificator from '@utils/Notificator';
 
 type FormData = Yup.InferType<typeof formSchema>;
 
@@ -19,7 +19,6 @@ const useLoginViewModel = () => {
     resolver: yupResolver(formSchema),
   });
   const navigate = useNavigate();
-  const [apiError, setApiError] = useState('');
   const { setAccessToken } = useAuthStore();
 
   const handleLogin = handleSubmit(async formData => {
@@ -29,10 +28,9 @@ const useLoginViewModel = () => {
     })
       .then(data => {
         setAccessToken(data.accessToken);
-        setApiError('');
       })
       .catch(error => {
-        setApiError(error?.message);
+        Notificator.error(error?.message);
       });
   });
 
@@ -40,7 +38,6 @@ const useLoginViewModel = () => {
     handleLogin,
     navigate,
     register,
-    apiError,
     isLoading: formState.isSubmitting,
     formErrors: formState.errors,
   };

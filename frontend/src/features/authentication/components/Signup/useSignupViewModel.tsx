@@ -1,11 +1,12 @@
-import SignupService from '@features/authentication/services/SignupService';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Helpers from '@utils/Helpers';
 import { InputErrorMessages } from '@utils/systemConstants';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import SignupService from '@features/authentication/services/SignupService';
+import Helpers from '@utils/Helpers';
+import Notificator from '@utils/Notificator';
 
 type FormData = Yup.InferType<typeof formSchema>;
 
@@ -35,7 +36,7 @@ const useSignupViewModel = () => {
     })
       .then(() => setApiError(''))
       .catch(error => {
-        setApiError(error?.message);
+        Notificator.error(error?.message);
       });
   });
 

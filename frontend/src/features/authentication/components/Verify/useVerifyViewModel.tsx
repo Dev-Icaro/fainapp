@@ -1,5 +1,6 @@
 import VerifyService from '@features/authentication/services/VerifyService';
 import { ChangeEvent, FormEvent, useState } from 'react';
+import Notificator from '@utils/Notificator';
 
 const useVerifyViewModel = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,7 +12,7 @@ const useVerifyViewModel = () => {
     setIsLoading(true);
     await VerifyService.execute(verificationCode)
       .then(() => setApiError(''))
-      .catch(error => setApiError(error?.message))
+      .catch(error => Notificator.error(error?.message))
       .finally(() => setIsLoading(false));
   };
 
