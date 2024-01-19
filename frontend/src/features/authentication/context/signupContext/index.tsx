@@ -9,9 +9,10 @@ export const SignupProvider = () => {
     password: '',
     name: '',
   });
+  const [step, setStep] = useState(1);
 
   return (
-    <SignupContext.Provider value={{ signupData, setSignupData }}>
+    <SignupContext.Provider value={{ signupData, setSignupData, setStep, step }}>
       <Outlet />
     </SignupContext.Provider>
   );
