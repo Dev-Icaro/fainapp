@@ -1,12 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InputErrorMessages } from '@utils/systemConstants';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import SignupService from '@features/authentication/services/SignupService';
 import Helpers from '@utils/Helpers';
 import Notificator from '@utils/Notificator';
+import { useSignupContext } from '@features/authentication/context/signupContext';
 
 type FormData = Yup.InferType<typeof formSchema>;
 
@@ -25,16 +25,21 @@ const useSignupViewModel = () => {
   const { formState, handleSubmit, register } = useForm<FormData>({
     resolver: yupResolver(formSchema),
   });
-  const [apiError, setApiError] = useState('');
   const navigate = useNavigate();
+  const { setSignupData } = useSignupContext();
 
   const handleSignup = handleSubmit(async data => {
-    await SignupService.execute({
+    const signupData = {
       mail: data.mail,
       name: data.name,
       password: data.password,
-    })
-      .then(() => setApiError(''))
+    };
+
+    await SignupService.execute(signupData)
+      .then(() => {
+        setSignupData(signupData);
+        navigate('/auth/verify');
+      })
       .catch(error => {
         Notificator.error(error?.message);
       });
@@ -44,7 +49,6 @@ const useSignupViewModel = () => {
     handleSignup,
     register,
     navigate,
-    apiError,
     formErrors: formState.errors,
     isLoading: formState.isSubmitting,
   };

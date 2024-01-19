@@ -6,7 +6,7 @@ import stylesTheme from '@styles/Theme.module.scss';
 import Button from '@components/Button';
 
 const VerifyView = () => {
-  const { handleSubmit, isLoading } = useVerifyViewModel();
+  const { handleSubmit, isLoading, email } = useVerifyViewModel();
 
   return isLoading ? (
     <Loading />
@@ -14,8 +14,7 @@ const VerifyView = () => {
     <div className={styles.container}>
       <form action="" onSubmit={handleSubmit} className={styles.verifyForm}>
         <p>
-          Por favor, digite o código que enviamos para o email:{' '}
-          <strong>icarokiilermelo@gmail.com</strong>
+          Por favor, digite o código que enviamos para o email: <strong>{email}</strong>
         </p>
         <div className={styles.verifyForm__verificationCode}>
           <InputDigit />
