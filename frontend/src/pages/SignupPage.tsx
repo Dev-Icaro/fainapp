@@ -1,10 +1,13 @@
 import { AuthPageLayout, SignupView } from '@features/authentication';
+import { SignupProvider } from '@features/authentication/context/signupContext';
 
 const SignupPage = () => {
   return (
-    <AuthPageLayout title="Cadastre-se">
-      <SignupView />
-    </AuthPageLayout>
+    <SignupProvider>
+      <AuthPageLayout title="Cadastre-se">
+        <SignupView />
+      </AuthPageLayout>
+    </SignupProvider>
   );
 };
 

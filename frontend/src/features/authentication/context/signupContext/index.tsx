@@ -1,19 +1,22 @@
-import { useContext, useState } from 'react';
+import { ReactNode, useContext, useState } from 'react';
 import ISignupDTO from '@features/authentication/interfaces/ISignupDTO';
 import { SignupContext } from './SignupContext';
-import { Outlet } from 'react-router-dom';
 
-export const SignupProvider = () => {
+interface SignupProviderProps {
+  children: ReactNode;
+}
+
+export const SignupProvider = ({ children }: SignupProviderProps) => {
   const [signupData, setSignupData] = useState<ISignupDTO>({
     mail: '',
     password: '',
     name: '',
   });
-  const [step, setStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(1);
 
   return (
-    <SignupContext.Provider value={{ signupData, setSignupData, setStep, step }}>
-      <Outlet />
+    <SignupContext.Provider value={{ signupData, setSignupData, currentStep, setCurrentStep }}>
+      {children}
     </SignupContext.Provider>
   );
 };

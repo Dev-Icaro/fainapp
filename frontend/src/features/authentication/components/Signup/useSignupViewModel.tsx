@@ -6,27 +6,10 @@ import VerifyView from '../Verify/VerifyView';
 
 const useSignupViewModel = () => {
   const navigate = useNavigate();
-  const { step } = useSignupContext();
-  // const { setSignupData } = useSignupContext();
-
-  // const handleSignup = handleSubmit(async data => {
-  //   const signupData = {
-  //     mail: data.mail,
-  //     name: data.name,
-  //     password: data.password,
-  //   };
-
-  //   await SignupService.execute(signupData)
-  //     .then(() => {
-  //       setSignupData(signupData);
-  //     })
-  //     .catch(error => {
-  //       Notificator.error(error?.message);
-  //     });
-  // });
+  const { currentStep } = useSignupContext();
 
   const showCurrentStep = () => {
-    switch (step) {
+    switch (currentStep) {
       case 1:
         return <SignupStep1 />;
       case 2:
@@ -39,6 +22,7 @@ const useSignupViewModel = () => {
   return {
     navigate,
     showCurrentStep,
+    currentStep,
   };
 };
 

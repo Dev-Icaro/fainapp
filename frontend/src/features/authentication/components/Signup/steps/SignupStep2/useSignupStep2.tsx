@@ -27,16 +27,18 @@ const useSignupStep2 = () => {
   } = useForm<FormData>({
     resolver: yupResolver(formSchema),
   });
-  const { setSignupData, setStep, signupData } = useSignupContext();
+  const { setSignupData, setCurrentStep, signupData } = useSignupContext();
   const navigate = useNavigate();
 
   const handleSubmitData = handleSubmit(async data => {
-    setSignupData(signupData => ({ ...signupData, password: data.password }));
+    const finalData = { ...signupData, password: data.password };
+    setSignupData(finalData);
 
-    await SignupService.execute(signupData)
+    await SignupService.execute(finalData)
       .then(() => {
         setSignupData(signupData);
-        setStep(3);
+        Notificator.success('Passo 2 concluído!');
+        setCurrentStep(3);
       })
       .catch(error => {
         Notificator.error(error?.message);
