@@ -1,11 +1,9 @@
-import { useNavigate } from 'react-router-dom';
 import SignupStep1 from './steps/SignupStep1/SignupStep1';
 import SignupStep2 from './steps/SignupStep2/SignupStep2';
 import { useSignupContext } from '@features/authentication/context/signupContext';
-import VerifyView from '../Verify/VerifyView';
+import VerifyView from './steps/SignupStep3/SignupStep3';
 
 const useSignupViewModel = () => {
-  const navigate = useNavigate();
   const { currentStep } = useSignupContext();
 
   const showCurrentStep = () => {
@@ -20,7 +18,6 @@ const useSignupViewModel = () => {
   };
 
   return {
-    navigate,
     showCurrentStep,
     currentStep,
   };

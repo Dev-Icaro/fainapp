@@ -10,8 +10,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = ({ className, children, variant, ...props }: ButtonProps) => {
   const classes = classNames(styles.button, className, {
-    [styles.button__filled]: variant === 'filled',
-    [styles.button__outlined]: variant === 'outlined',
+    [styles['button--filled']]: variant === 'filled',
+    [styles['button--outlined']]: variant === 'outlined',
+    [styles['button--filled--disabled']]: variant === 'filled' && props.disabled === true,
+    [styles['button--outlined--disabled']]: variant === 'outlined' && props.disabled === true,
   });
   return (
     <button className={classes} {...props}>

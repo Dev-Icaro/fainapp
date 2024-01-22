@@ -1,13 +1,19 @@
 import { ChangeEvent, InputHTMLAttributes, useRef, useState, KeyboardEvent } from 'react';
 import styles from './InputDigit.module.scss';
 
-const InputDigit = (props: InputHTMLAttributes<HTMLInputElement>) => {
+interface InputDigitProps extends InputHTMLAttributes<HTMLInputElement> {
+  onChange(event: ChangeEvent<HTMLInputElement>): void;
+}
+
+const InputDigit = (props: InputDigitProps) => {
   const ref = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState('');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value.trim();
     setInputValue(newValue);
+
+    props.onChange(event);
 
     if (newValue) {
       focusNextInput();

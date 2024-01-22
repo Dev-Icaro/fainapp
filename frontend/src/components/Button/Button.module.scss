@@ -10,22 +10,36 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: linear 0.2s;
 
-  &__filled {
+  &--filled {
     border: 0px;
     color: $background-color-light;
     background-color: $blue-light;
 
-    &:hover {
-      background: $blue-dark;
+    &--disabled {
+      background-color: #cccccc;
+      color: $background-color-light;
+      box-shadow: none;
+      cursor: default;
+    }
+
+    &:hover:not(&--disabled) {
+      background-color: $blue-dark;
     }
   }
 
-  &__outlined {
+  &--outlined {
     background-color: transparent;
     border: 2px solid $blue-light;
     color: $blue-light;
 
-    &:hover {
+    &--disabled {
+      border-color: #cccccc;
+      color: #cccccc;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    &:hover:not(&--disabled) {
       color: $blue-dark;
     }
   }
